@@ -1,0 +1,28 @@
+
+READ TABLE it_lips INTO wa_lips WITH KEY vbeln = wa_hdr-DELIV_NUMB.
+
+SELECT SINGLE * FROM vbak INTO wa_vbak
+  WHERE vbeln = wa_lips-vgbel.
+
+SELECT SINGLE * FROM T001W INTO WA_T001W
+  WHERE WERKS = WA_lips-WERKS.
+
+SELECT SINGLE * FROM ADRC INTO WA_ADRC
+  WHERE ADDRNUMBER = WA_T001W-ADRNR.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

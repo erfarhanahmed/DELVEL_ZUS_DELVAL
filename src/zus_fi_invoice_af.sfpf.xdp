@@ -1,0 +1,1633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xfa generator="AdobeLiveCycleDesigner_V11.0.9.20211220.1.16_SAP" APIVersion="3.6.21350.0"?><xdp:xdp xmlns:xdp="http://ns.adobe.com/xdp/" timeStamp="2025-07-31T11:24:49Z" uuid="3393705b-7eed-45e8-948f-4ac75ac86737">
+<template xmlns:xliff="urn:oasis:names:tc:xliff:document:1.1" xmlns="http://www.xfa.org/schema/xfa-template/3.3/">
+   <?formServer defaultPDFRenderFormat acrobat10.0dynamic?>
+   <subform layout="tb" locale="en_US" name="data" restoreState="auto">
+      <pageSet>
+         <pageArea id="Page1" name="Page1">
+            <contentArea h="284.3mm" name="Main" w="203.2mm" x="3.175mm" y="6.35mm"/>
+            <medium long="297mm" short="210mm" stock="a4"/>
+            <?templateDesigner expand 1?></pageArea>
+         <?templateDesigner expand 1?></pageSet>
+      <subform h="284.319mm" name="Body" w="203.2mm">
+         <field h="25.4mm" name="COMPANY_LOGO" w="25.4mm" x="3.175mm">
+            <ui>
+               <imageEdit/>
+            </ui>
+            <bind match="dataRef" ref="$record.LOGO.COMPANY_LOGO"/>
+            <desc>
+               <exData name="Schema Annotation">Company Logo
+URL-FIELD = GV_COMP_LOGO</exData>
+            </desc>
+         </field>
+         <subform h="63.5mm" name="InvoiceDetails" w="111.125mm" x="92.075mm">
+            <bind match="none"/>
+            <draw h="10.172mm" name="Header" w="41.275mm" y="3.175mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <text xliff:rid="512CCE3C-E5F0-43C4-A737-F2BBE19BEC43">INVOICE</text>
+               </value>
+               <font baselineShift="0pt" size="26pt" typeface="Times New Roman" weight="bold"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+               <?renderCache.bounds 114166 26000 0 0 1417 1417 0 0?>
+               <?renderCache.textRun 7 INVOICE 0 1417 21806 0 0 0 "Times New Roman" 1 0 26000 ISO-8859-1?></draw>
+            <draw h="5.2331mm" name="InvoiceNo" w="29.2864mm" y="15.875mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <text xliff:rid="87A3DED9-C8AF-4319-88E0-AEE3A8E1CF36">Invoice No.</text>
+               </value>
+               <font baselineShift="0pt" size="11pt" typeface="Times New Roman" weight="bold"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+               <?renderCache.bounds 80183 12000 0 0 1417 1417 0 0?>
+               <?renderCache.textRun 11 Invoice No. 0 1417 10043 0 0 0 "Times New Roman" 1 0 11000 ISO-8859-1?></draw>
+            <draw h="5.2331mm" name="Date" w="29.2864mm" y="22.225mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <text xliff:rid="3761917B-01DF-4728-BE9A-A84A9D9E9FFC">Invoice Date</text>
+               </value>
+               <font baselineShift="0pt" size="11pt" typeface="Times New Roman" weight="bold"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+               <?renderCache.bounds 80183 12000 0 0 1417 1417 0 0?>
+               <?renderCache.textRun 12 Invoice Date 0 1417 10043 0 0 0 "Times New Roman" 1 0 11000 ISO-8859-1?></draw>
+            <draw h="5.2331mm" name="DueDate" w="32.27mm" y="28.575mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <text xliff:rid="9846FD88-6DAE-4D84-B513-184EB296C921">Invoice Due Date</text>
+               </value>
+               <font baselineShift="0pt" size="11pt" typeface="Times New Roman" weight="bold"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+               <?renderCache.bounds 88640 12000 0 0 1417 1417 0 0?>
+               <?renderCache.textRun 16 Invoice Due Date 0 1417 10043 0 0 0 "Times New Roman" 1 0 11000 ISO-8859-1?></draw>
+            <draw h="25.4mm" name="Remit" w="63.5mm" y="38.1mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <exData contentType="text/html" xliff:rid="53193188-9886-4108-8E5E-CCBE5147BC5E">
+                     <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="letter-spacing:0in">Remit Payments to:</p><p style="font-size:9pt;font-weight:normal;text-decoration:none;letter-spacing:0in">DelVal Flow Controls USA, LLC</p><p style="font-size:9pt;font-weight:normal;text-decoration:none;letter-spacing:0in">Dept. 0593</p><p style="font-size:9pt;font-weight:normal;text-decoration:none;letter-spacing:0in">PO Box 120593</p><p style="font-size:9pt;font-weight:normal;text-decoration:none;letter-spacing:0in">Dallas, TX 75312-0593</p><p style="font-size:9pt;font-weight:normal;text-decoration:none;letter-spacing:0in"><span style="xfa-spacerun:yes"> </span></p></body>
+                  </exData>
+               </value>
+               <font baselineShift="0pt" size="11pt" typeface="Times New Roman" weight="bold"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+            </draw>
+            <?templateDesigner expand 0?>
+            <field access="readOnly" h="9mm" id="floatingField024464" name="GV_INV_NO" presence="hidden" w="87.4mm" x="0mm" y="0mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="10"/>
+               </value>
+               <bind match="dataRef" ref="$record.INVOICE_DETAILS.GV_INV_NO"/>
+               <desc>
+                  <text name="Schema Annotation">Document Number of an Accounting Document</text>
+               </desc>
+            </field>
+            <draw h="5.2331mm" name="InvoiceNo_val" w="38.1mm" x="34.925mm" y="15.875mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <exData contentType="text/html">
+                     <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="letter-spacing:0in"><span xfa:embed="#floatingField024464" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                  </exData>
+               </value>
+               <font baselineShift="0pt" typeface="Times New Roman" underline="1"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+            </draw>
+            <field access="readOnly" h="9mm" id="floatingField005705" name="GV_INV_DATE" presence="hidden" w="87.4mm" x="0mm" y="0mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="11"/>
+               </value>
+               <bind match="dataRef" ref="$record.INVOICE_DETAILS.GV_INV_DATE"/>
+               <desc>
+                  <text name="Schema Annotation">Data Element Length 11</text>
+               </desc>
+            </field>
+            <draw h="5.2331mm" name="InvDate_Val" w="38.1mm" x="34.925mm" y="22.225mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <exData contentType="text/html">
+                     <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="letter-spacing:0in"><span xfa:embed="#floatingField005705" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                  </exData>
+               </value>
+               <font baselineShift="0pt" typeface="Times New Roman" underline="1"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+            </draw>
+            <field access="readOnly" h="9mm" id="floatingField028145" name="GV_DUE_DATE" presence="hidden" w="87.4mm" x="0mm" y="0mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="11"/>
+               </value>
+               <bind match="dataRef" ref="$record.INVOICE_DETAILS.GV_DUE_DATE"/>
+               <desc>
+                  <text name="Schema Annotation">Data Element Length 11</text>
+               </desc>
+            </field>
+            <draw h="5.2331mm" name="DueDate_Val" w="38.1mm" x="34.925mm" y="28.575mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <exData contentType="text/html">
+                     <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="letter-spacing:0in"><span xfa:embed="#floatingField028145" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                  </exData>
+               </value>
+               <font baselineShift="0pt" typeface="Times New Roman" underline="1"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+            </draw>
+         </subform>
+         <subform h="34.925mm" name="Address" w="88.9mm" y="25.4mm">
+            <bind match="none"/>
+            <field access="readOnly" h="9mm" id="floatingField020295" name="NAME1" presence="hidden" w="87.4mm" x="0mm" y="0mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="40"/>
+               </value>
+               <bind match="dataRef" ref="$record.ADDRESS.GS_ADRC.NAME1"/>
+               <desc>
+                  <text name="Schema Annotation">Name 1</text>
+               </desc>
+            </field>
+            <field access="readOnly" h="9mm" id="floatingField032747" name="TEL_NUMBER" presence="hidden" w="87.4mm" x="0mm" y="0mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="30"/>
+               </value>
+               <bind match="dataRef" ref="$record.ADDRESS.GS_ADRC.TEL_NUMBER"/>
+               <desc>
+                  <text name="Schema Annotation">First Telephone No.: Dialing Code + Number</text>
+               </desc>
+            </field>
+            <field access="readOnly" h="9mm" id="floatingField009526" name="FAX_NUMBER" presence="hidden" w="87.4mm" x="0mm" y="0mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="30"/>
+               </value>
+               <bind match="dataRef" ref="$record.ADDRESS.GS_ADRC.FAX_NUMBER"/>
+               <desc>
+                  <text name="Schema Annotation">First Fax No.: Area Code + Number</text>
+               </desc>
+            </field>
+            <?templateDesigner expand 0?>
+            <draw h="31.75mm" name="Address" w="85.725mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <exData contentType="text/html" xliff:rid="B2E32AE1-2E16-4DEC-90E4-76851CE9E5CF">
+                     <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="text-decoration:none;letter-spacing:0in"><span xfa:embed="#floatingField020295" xfa:embedMode="raw" xfa:embedType="uri"/></p><p style="font-weight:normal;text-decoration:none;letter-spacing:0in">6535 Industrial Drive | Suite 103</p><p style="font-weight:normal;text-decoration:none;letter-spacing:0in">Geismar, LA 70734<span style="font-weight:bold"><span style="xfa-spacerun:yes"> </span></span></p><p style="font-weight:normal;text-decoration:none;letter-spacing:0in">O :<span style="xfa-spacerun:yes"> </span><span xfa:embed="#floatingField032747" xfa:embedMode="raw" xfa:embedType="uri"/></p><p style="font-weight:normal;text-decoration:none;letter-spacing:0in">F :<span style="xfa-spacerun:yes"> </span><span xfa:embed="#floatingField009526" xfa:embedMode="raw" xfa:embedType="uri"/></p><p style="font-weight:normal;letter-spacing:0in">delvalflow.com</p><p style="font-weight:normal;letter-spacing:0in">sales@delvalflow.com</p></body>
+                  </exData>
+               </value>
+               <font baselineShift="0pt" size="9pt" typeface="Times New Roman" weight="bold"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+            </draw>
+         </subform>
+         <subform layout="tb" name="ShipToAddress" w="203.2mm" y="71.465mm">
+            <bind match="none"/>
+            <draw h="0.192139in" name="Customer" w="92.075mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <text xliff:rid="227BF666-1856-436F-9BAF-3FB5F71EE470">Customer :</text>
+               </value>
+               <font baselineShift="0pt" size="11pt" typeface="Times New Roman" weight="bold"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+               <border>
+                  <edge/>
+                  <corner thickness="0.176mm"/>
+               </border>
+               <?renderCache.bounds 258166 11000 0 0 1417 1417 0 0?>
+               <?renderCache.textRun 10 Customer : 0 1417 10043 0 0 0 "Times New Roman" 1 0 11000 ISO-8859-1?></draw>
+            <field access="readOnly" h="9mm" id="floatingField000041" name="NAME1" presence="hidden" w="87.4mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="40"/>
+               </value>
+               <bind match="dataRef" ref="$record.SHIP_TO_ADDRESS.GS_ADRC_SP.NAME1"/>
+               <desc>
+                  <text name="Schema Annotation">Name 1</text>
+               </desc>
+            </field>
+            <field access="readOnly" h="9mm" id="floatingField018467" name="STREET" presence="hidden" w="87.4mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="60"/>
+               </value>
+               <bind match="dataRef" ref="$record.SHIP_TO_ADDRESS.GS_ADRC_SP.STREET"/>
+               <desc>
+                  <text name="Schema Annotation">Street</text>
+               </desc>
+            </field>
+            <field access="readOnly" h="9mm" id="floatingField006334" name="STR_SUPPL1" presence="hidden" w="87.4mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="40"/>
+               </value>
+               <bind match="dataRef" ref="$record.SHIP_TO_ADDRESS.GS_ADRC_SP.STR_SUPPL1"/>
+               <desc>
+                  <text name="Schema Annotation">Street 2</text>
+               </desc>
+            </field>
+            <field access="readOnly" h="9mm" id="floatingField026500" name="STR_SUPPL2" presence="hidden" w="87.4mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="40"/>
+               </value>
+               <bind match="dataRef" ref="$record.SHIP_TO_ADDRESS.GS_ADRC_SP.STR_SUPPL2"/>
+               <desc>
+                  <text name="Schema Annotation">Street 3</text>
+               </desc>
+            </field>
+            <field access="readOnly" h="9mm" id="floatingField019169" name="CITY1" presence="hidden" w="87.4mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="40"/>
+               </value>
+               <bind match="dataRef" ref="$record.SHIP_TO_ADDRESS.GS_ADRC_SP.CITY1"/>
+               <desc>
+                  <text name="Schema Annotation">City</text>
+               </desc>
+            </field>
+            <field access="readOnly" h="9mm" id="floatingField015724" name="REGION" presence="hidden" w="87.4mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="3"/>
+               </value>
+               <bind match="dataRef" ref="$record.SHIP_TO_ADDRESS.GS_ADRC_SP.REGION"/>
+               <desc>
+                  <text name="Schema Annotation">Region (State, Province, County)</text>
+               </desc>
+            </field>
+            <field access="readOnly" h="9mm" id="floatingField011478" name="POST_CODE1" presence="hidden" w="87.4mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="10"/>
+               </value>
+               <bind match="dataRef" ref="$record.SHIP_TO_ADDRESS.GS_ADRC_SP.POST_CODE1"/>
+               <desc>
+                  <text name="Schema Annotation">City postal code</text>
+               </desc>
+            </field>
+            <field access="readOnly" h="9mm" id="floatingField029358" name="COUNTRY" presence="hidden" w="87.4mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="3"/>
+               </value>
+               <bind match="dataRef" ref="$record.SHIP_TO_ADDRESS.GS_ADRC_SP.COUNTRY"/>
+               <desc>
+                  <text name="Schema Annotation">Country/Region Key</text>
+               </desc>
+            </field>
+            <field access="readOnly" h="9mm" id="floatingField026962" name="GV_EMAIL" presence="hidden" w="87.4mm">
+               <ui>
+                  <textEdit>
+                     <border presence="hidden"/>
+                     <margin/>
+                  </textEdit>
+               </ui>
+               <font typeface="Arial"/>
+               <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+               <para vAlign="middle"/>
+               <value>
+                  <text maxChars="241"/>
+               </value>
+               <bind match="dataRef" ref="$record.SHIP_TO_ADDRESS.GV_EMAIL"/>
+               <desc>
+                  <text name="Schema Annotation">E-Mail Address</text>
+               </desc>
+            </field>
+            <draw h="30.1mm" name="Address" w="92.075mm">
+               <ui>
+                  <textEdit/>
+               </ui>
+               <value>
+                  <exData contentType="text/html">
+                     <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="text-decoration:none;letter-spacing:0in"><span xfa:embed="#floatingField000041" xfa:embedMode="raw" xfa:embedType="uri"/></p><p style="text-decoration:none;letter-spacing:0in"><span xfa:embed="#floatingField018467" xfa:embedMode="raw" xfa:embedType="uri"/><span style="xfa-spacerun:yes"> </span><span xfa:embed="#floatingField006334" xfa:embedMode="raw" xfa:embedType="uri"/><span style="xfa-spacerun:yes"> </span><span xfa:embed="#floatingField026500" xfa:embedMode="raw" xfa:embedType="uri"/></p><p style="text-decoration:none;letter-spacing:0in"><span xfa:embed="#floatingField019169" xfa:embedMode="raw" xfa:embedType="uri"/><span style="xfa-spacerun:yes"> </span><span xfa:embed="#floatingField015724" xfa:embedMode="raw" xfa:embedType="uri"/><span style="xfa-spacerun:yes"> </span><span xfa:embed="#floatingField011478" xfa:embedMode="raw" xfa:embedType="uri"/></p><p style="text-decoration:none;letter-spacing:0in"><span xfa:embed="#floatingField029358" xfa:embedMode="raw" xfa:embedType="uri"/></p><p style="text-decoration:none;letter-spacing:0in"><span xfa:embed="#floatingField026962" xfa:embedMode="raw" xfa:embedType="uri"/></p><p style="text-decoration:none;letter-spacing:0in"><span style="xfa-spacerun:yes"> </span></p></body>
+                  </exData>
+               </value>
+               <font baselineShift="0pt" typeface="Times New Roman"/>
+               <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+               <border>
+                  <edge/>
+                  <corner thickness="0.176mm"/>
+               </border>
+               <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+            </draw>
+            <border>
+               <edge/>
+               <corner thickness="0.176mm"/>
+            </border>
+            <subform h="35.935mm" name="SupplierDetails" w="203.2mm">
+               <bind match="none"/>
+               <subform h="35.965mm" name="Supplier" w="203.177mm" x="0.023mm" y="0mm">
+                  <bind match="none"/>
+                  <draw h="6mm" hAlign="center" name="Customer" w="35mm" y="0.065mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="732E5E3F-FB57-4162-AC51-EFE1BBE2DDF9">Customer ID No.</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 96379 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 15 Customer ID No. 0 13083 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="PO_num" w="35mm" x="34.925mm" y="0.065mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="CA0539D1-68A0-4B15-8134-D4E0359D3F59">PO Number</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 96379 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 9 PO Number 0 23637 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Payment_terms" w="57.15mm" x="69.85mm" y="0.065mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="36FC8028-7372-4F89-BD47-0CB8512B6701">Payment Terms</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 159166 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 13 Payment Terms 0 46981 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Reference" w="76.223mm" x="126.954mm" y="0mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="1ABB732C-113D-4F9E-B3BD-7DAB699079F4">Reference</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 213231 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 9 Reference 0 86660 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <field access="readOnly" h="9mm" id="floatingField023281" name="GV_CUSTOMER" presence="hidden" w="87.4mm" y="0.065mm">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                     <para hAlign="center" vAlign="middle"/>
+                     <value>
+                        <text maxChars="10"/>
+                     </value>
+                     <bind match="dataRef" ref="$record.SUPPLIER.GV_CUSTOMER"/>
+                     <desc>
+                        <text name="Schema Annotation">Customer Number</text>
+                     </desc>
+                  </field>
+                  <draw h="12mm" name="Cust_Val" w="35mm" y="5.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <exData contentType="text/html">
+                           <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p><span xfa:embed="#floatingField023281" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                        </exData>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="1mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                  </draw>
+                  <draw h="12mm" name="PO_Val" w="35mm" x="34.925mm" y="5.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="78718517-145C-45A3-8600-23304330D7AF"/>
+                     </value>
+                     <font typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 96379 31182 0 0 1417 1417 0 0?></draw>
+                  <field access="readOnly" h="9mm" id="floatingField016827" name="GV_ZTERM" presence="hidden" w="87.4mm" y="0.065mm">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                     <para vAlign="middle"/>
+                     <value>
+                        <text maxChars="50"/>
+                     </value>
+                     <bind match="dataRef" ref="$record.SUPPLIER.GV_ZTERM"/>
+                     <desc>
+                        <text name="Schema Annotation">Own Explanation of Term of Payment</text>
+                     </desc>
+                  </field>
+                  <draw h="12mm" name="Terms_val" w="57.15mm" x="69.85mm" y="5.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <exData contentType="text/html">
+                           <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p><span xfa:embed="#floatingField016827" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                        </exData>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="1mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                  </draw>
+                  <field access="readOnly" h="9mm" id="floatingField009961" name="GV_REF" presence="hidden" w="87.4mm" y="0.065mm">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                     <para vAlign="middle"/>
+                     <value>
+                        <text maxChars="16"/>
+                     </value>
+                     <bind match="dataRef" ref="$record.SUPPLIER.GV_REF"/>
+                     <desc>
+                        <text name="Schema Annotation">Reference Document Number</text>
+                     </desc>
+                  </field>
+                  <draw h="12mm" name="Reference_Val" w="76.223mm" x="126.954mm" y="5.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <exData contentType="text/html">
+                           <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p><span xfa:embed="#floatingField009961" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                        </exData>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="1mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                  </draw>
+                  <draw h="6mm" name="Ship_date" w="34.925mm" y="17.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="5C98EFFC-97A8-4703-AC10-AF2A802C21ED">Shipping Date</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 96166 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 13 Shipping Date 0 19073 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Ship_Method" w="35mm" x="34.925mm" y="17.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="E3F42C57-5F8C-407C-8753-65587AF45967">Shipping Method</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 96379 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 15 Shipping Method 0 12509 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Ship_origin" w="57.15mm" x="69.85mm" y="17.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="91C70D84-A3D1-4B9C-BB79-F5001B5AE576">Shipping Origin</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 159166 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 15 Shipping Origin 0 46400 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="IncoTerms" w="41.275mm" x="127mm" y="17.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="E4CB8977-87A2-43F9-9E53-6E378DA0F851">Incoterms</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 114166 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 9 Incoterms 0 36840 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Tracking" w="34.948mm" x="168.229mm" y="17.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="C890E7E2-0CFD-44C2-82F1-0F0F38C7AC1C">Tracking No.</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 96231 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 12 Tracking No. 0 21198 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="12mm" name="ShipDate_Val" w="34.925mm" y="23.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="2F5CE1CA-33CC-4E2C-AE2C-65629DADA392"/>
+                     </value>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 96166 31182 0 0 1417 1417 0 0?></draw>
+                  <draw h="12mm" name="ShipMeth_Val" w="34.925mm" x="34.925mm" y="23.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="335B45E8-4BE6-49DC-9438-EA056C624952"/>
+                     </value>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 96166 31182 0 0 1417 1417 0 0?></draw>
+                  <draw h="12mm" name="ShipMeth_Val" w="57.15mm" x="69.85mm" y="23.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="1064FC44-1990-4D2C-B4D4-44D444915998"/>
+                     </value>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 159166 31182 0 0 1417 1417 0 0?></draw>
+                  <draw h="12mm" name="Inco_Val" w="41.275mm" x="127mm" y="23.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="A45BD5A8-AE05-4FBA-91CF-ECB317DB4153"/>
+                     </value>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 114166 31182 0 0 1417 1417 0 0?></draw>
+                  <draw h="12mm" name="Track_Val" w="34.948mm" x="168.229mm" y="23.965mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="F6AB88A8-D2B7-493C-A6B5-EAF6B329B04A"/>
+                     </value>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 96231 31182 0 0 1417 1417 0 0?></draw>
+                  <?templateDesigner expand 0?></subform>
+               <?templateDesigner expand 1?></subform>
+            <subform layout="tb" name="Main_Table" w="203.2mm">
+               <bind match="none"/>
+               <subform columnWidths="10mm 25mm 42.343mm 27.653mm 23.987mm 32.88mm 41.38mm" layout="table" name="Table1">
+                  <border>
+                     <edge/>
+                  </border>
+                  <subform id="HeaderRow_ID" layout="row" name="HeaderRow" y="0.004mm">
+                     <assist role="TH"/>
+                     <draw h="10mm" name="Cell1">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <value>
+                           <text xliff:rid="94EAABFB-B8AC-4187-B32C-F6A01569EF07">Line Item</text>
+                        </value>
+                        <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="middle"/>
+                     </draw>
+                     <draw h="10mm" name="Cell2">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <value>
+                           <text xliff:rid="270ADD29-EBFA-46EF-89C6-F461BB263A20">GL Code</text>
+                        </value>
+                        <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="middle"/>
+                     </draw>
+                     <draw h="10mm" name="Cell3">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <value>
+                           <text xliff:rid="4324D15B-BF7C-4FE1-9E62-C56CDF5B2658">Description</text>
+                        </value>
+                        <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="middle"/>
+                     </draw>
+                     <draw h="10mm" name="Cell4">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <value>
+                           <text xliff:rid="F75417F9-3FD8-4CFE-A82F-98138BE1F3A2">Tag No</text>
+                        </value>
+                        <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="middle"/>
+                     </draw>
+                     <draw h="10mm" name="Cell5">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <value>
+                           <text xliff:rid="A5C5F434-9073-48C1-ACCB-91C3C8654DA7">Quantity</text>
+                        </value>
+                        <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="middle"/>
+                     </draw>
+                     <draw name="Cell6">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <value>
+                           <text xliff:rid="5DF9A482-5402-4DED-93D3-E92DD9596D70">Unit Price</text>
+                        </value>
+                        <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="middle"/>
+                     </draw>
+                     <draw h="10mm" name="Cell7">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <value>
+                           <text xliff:rid="5CAEEEF0-E1E7-46D8-B052-73C0F827D001">Amount</text>
+                        </value>
+                        <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="middle"/>
+                     </draw>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <occur max="-1"/>
+                     <bind match="none"/>
+                     <?templateDesigner expand 1?></subform>
+                  <subform layout="row" name="Row1" y="0.004mm">
+                     <assist role="TR"/>
+                     <field access="readOnly" h="10mm" minW="25.4mm" name="BUZEI">
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <font typeface="Times New Roman"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para vAlign="middle"/>
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <value>
+                           <text maxChars="3"/>
+                        </value>
+                        <bind match="dataRef" ref="$.BUZEI"/>
+                        <desc>
+                           <text name="Schema Annotation">Number of Line Item Within Accounting Document</text>
+                        </desc>
+                     </field>
+                     <field access="readOnly" h="10mm" minW="25.4mm" name="HKONT">
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <font typeface="Times New Roman"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para vAlign="middle"/>
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <value>
+                           <text maxChars="10"/>
+                        </value>
+                        <bind match="dataRef" ref="$.HKONT"/>
+                        <desc>
+                           <text name="Schema Annotation">General Ledger Account</text>
+                        </desc>
+                     </field>
+                     <field h="10mm" minW="25.4mm" name="SGTXT">
+                        <ui>
+                           <textEdit multiLine="1"/>
+                        </ui>
+                        <font typeface="Times New Roman"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para vAlign="middle"/>
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <value>
+                           <text maxChars="50"/>
+                        </value>
+                        <bind match="dataRef" ref="$.SGTXT"/>
+                        <desc>
+                           <text name="Schema Annotation">Item Text</text>
+                        </desc>
+                     </field>
+                     <draw h="10mm" name="Cell4">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <font typeface="Times New Roman"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" vAlign="middle"/>
+                     </draw>
+                     <draw h="10mm" name="Cell5">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <font typeface="Times New Roman"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" vAlign="middle"/>
+                     </draw>
+                     <draw h="10mm" name="Cell6">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <font typeface="Times New Roman"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" vAlign="middle"/>
+                     </draw>
+                     <field access="readOnly" h="9mm" id="floatingField004827" name="DecimalField1" presence="hidden" w="62mm" x="0mm" y="0mm">
+                        <ui>
+                           <numericEdit>
+                              <border>
+                                 <edge stroke="lowered"/>
+                              </border>
+                              <margin/>
+                           </numericEdit>
+                        </ui>
+                        <font typeface="Arial"/>
+                        <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                        <para vAlign="middle"/>
+                        <value>
+                           <decimal fracDigits="-1"/>
+                        </value>
+                        <bind match="dataRef" ref="$.DMBTR"/>
+                        <format>
+                           <picture>num{z,zzz,zz9.99}</picture>
+                        </format>
+                     </field>
+                     <draw h="10mm" minW="23.4mm" name="DMBTR">
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <value>
+                           <exData contentType="text/html" xliff:rid="19D57A35-CA1F-4063-B37D-E7EEB75C3A92">
+                              <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="text-decoration:none;letter-spacing:0in">$<span xfa:embed="#floatingField004827" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                           </exData>
+                        </value>
+                        <font typeface="Times New Roman"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="right" marginRight="0.085pt" vAlign="middle"/>
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <caption reserve="0mm">
+                           <para hAlign="right" marginRight="0.085pt" vAlign="middle"/>
+                        </caption>
+                        <desc>
+                           <text name="Schema Annotation">Amount in local currency</text>
+                        </desc>
+                     </draw>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <bind match="dataRef" ref="$record.MAIN_TABLE.GT_BSEG.DATA[*]"/>
+                     <occur max="-1" min="0"/>
+                     <?templateDesigner expand 1?></subform>
+                  <keep intact="contentArea"/>
+                  <bind match="none"/>
+                  <?templateDesigner rowpattern first:1, next:1, firstcolor:f0f0f0, nextcolor:ffffff, apply:0?>
+                  <?templateDesigner expand 0?></subform>
+               <?templateDesigner expand 0?>
+               <subform h="107.495mm" name="Footer" w="203.2mm">
+                  <bind match="none"/>
+                  <draw h="6mm" minW="40.075mm" name="Subtotal" x="121.85mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="35EC5863-6566-4A3B-9E13-52D526300DF2">Subtotal</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                  </draw>
+                  <field access="readOnly" h="9mm" id="floatingField000491" name="GV_TOTAL" presence="hidden" w="87.4mm" y="0mm">
+                     <ui>
+                        <numericEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </numericEdit>
+                     </ui>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                     <para vAlign="middle"/>
+                     <value>
+                        <decimal leadDigits="21"/>
+                     </value>
+                     <desc>
+                        <text name="Schema Annotation">Amount in local currency</text>
+                     </desc>
+                     <validate nullTest="error"/>
+                     <bind match="dataRef" ref="$record.FOOTER.GV_TOTAL"/>
+                     <format>
+                        <picture>num{z,zzz,zz9.99}</picture>
+                     </format>
+                  </field>
+                  <draw h="6mm" name="SubTotal_Val" w="41.275mm" x="161.925mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <exData contentType="text/html" xliff:rid="B0A0667E-35CE-4807-AB69-AA15B128A5BE">
+                           <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="text-decoration:none;letter-spacing:0in">$<span xfa:embed="#floatingField000491" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                        </exData>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="right" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                  </draw>
+                  <draw h="6mm" name="State_Sales" w="40.075mm" x="121.85mm" y="6mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="A0F6B538-D750-4AD9-A225-5FD1B226F18D">State Sales Tax</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 110764 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 15 State Sales Tax 0 1417 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="State_sales_val" w="41.275mm" x="161.925mm" y="6mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="right" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <?renderCache.bounds 114166 14174 0 0 1417 1417 0 0?></draw>
+                  <draw h="6mm" name="Country_Sales" w="40.075mm" x="121.85mm" y="12mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="260F884E-6959-4E3B-A2B0-4B0FC61D875C">Country Sales Tax</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 110764 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 17 Country Sales Tax 0 1417 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Country_sales_val" w="41.275mm" x="161.925mm" y="12mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="right" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <?renderCache.bounds 114166 14174 0 0 1417 1417 0 0?></draw>
+                  <draw h="6mm" name="Local_Tax" w="40.075mm" x="121.85mm" y="18mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="D84CFECF-B81D-489E-BECB-8B7ACD55EACB">Local Tax</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 110764 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 9 Local Tax 0 1417 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Local_Tax_val" w="41.275mm" x="161.925mm" y="18mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="right" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <?renderCache.bounds 114166 14174 0 0 1417 1417 0 0?></draw>
+                  <draw h="6mm" name="Ship_Handling" w="40.075mm" x="121.85mm" y="24mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="85D296F0-2876-49F9-86B1-9E0C34B8E6E1">Shipping And Handling</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 110764 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 21 Shipping And Handling 0 1417 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Ship_hand_Val" w="41.275mm" x="161.925mm" y="24mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="right" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <?renderCache.bounds 114166 14174 0 0 1417 1417 0 0?></draw>
+                  <draw h="6mm" name="Service_Charge" w="40.075mm" x="121.85mm" y="30mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="370C4ECA-40D8-4325-99F9-80774DE040BB">Service Charges</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 110764 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 15 Service Charges 0 1417 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Service_Charge_Val" w="41.275mm" x="161.925mm" y="30mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="right" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <?renderCache.bounds 114166 14174 0 0 1417 1417 0 0?></draw>
+                  <draw h="6mm" name="Mounting_Charge" w="40.075mm" x="121.85mm" y="36mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="937BA3CC-4415-4363-AD7D-CDAB4AD0E43E">Mounting Charges</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 110764 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 16 Mounting Charges 0 1417 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Mounting_Charge_Val" w="41.275mm" x="161.925mm" y="36.085mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="right" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <?renderCache.bounds 114166 14174 0 0 1417 1417 0 0?></draw>
+                  <draw h="6mm" name="Tot_INV_Amt" w="40.075mm" x="121.85mm" y="42mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="BEB5D9D6-DF02-43EB-AE5C-911E1D1A6CEA">Total Invoice Amount</text>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <?renderCache.bounds 110764 14174 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 20 Total Invoice Amount 0 1417 9259 0 0 0 "Times New Roman" 1 0 10000 ISO-8859-1?></draw>
+                  <draw h="6mm" name="Tot_INV_amt_val" w="41.275mm" x="161.925mm" y="42mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <exData contentType="text/html" xliff:rid="0D0E54B8-C9AB-4BBE-8DA2-C3A0B527A19C">
+                           <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="text-decoration:none;letter-spacing:0in">$<span xfa:embed="#floatingField002995" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                        </exData>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <border>
+                        <edge/>
+                        <corner thickness="0.176mm"/>
+                     </border>
+                     <para hAlign="right" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                  </draw>
+                  <field access="readOnly" h="9mm" id="floatingField002995" name="GV_TOTAL_INV" presence="hidden" w="87.4mm" x="109.9mm" y="67.925mm">
+                     <ui>
+                        <numericEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </numericEdit>
+                     </ui>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                     <para vAlign="middle"/>
+                     <value>
+                        <decimal leadDigits="21"/>
+                     </value>
+                     <desc>
+                        <text name="Schema Annotation">Amount in local currency</text>
+                     </desc>
+                     <validate nullTest="error"/>
+                     <bind match="dataRef" ref="$record.FOOTER.GV_TOTAL"/>
+                     <format>
+                        <picture>num{z,zzz,zz9.99}</picture>
+                     </format>
+                  </field>
+                  <field access="readOnly" h="9mm" id="floatingField011942" name="GV_REMARK" presence="hidden" w="62mm" y="0mm">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font typeface="Arial"/>
+                     <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                     <para vAlign="middle"/>
+                     <value>
+                        <text maxChars="50"/>
+                     </value>
+                     <bind match="dataRef" ref="$record.FOOTER.GV_REMARK"/>
+                     <caption>
+                        <value>
+                           <text xliff:rid="4F0E9294-26A9-4CF2-B583-D4D8114AFF6B">Text</text>
+                        </value>
+                     </caption>
+                     <desc>
+                        <text name="Schema Annotation">Item Text</text>
+                     </desc>
+                  </field>
+                  <draw h="5.2331mm" name="Remark" w="120.65mm" y="52.05mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <exData contentType="text/html" xliff:rid="C1299603-97F9-413F-88A8-CEDEF7EC9663">
+                           <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="letter-spacing:0in">Remark :<span style="xfa-spacerun:yes"> </span><span style="font-weight:normal"><span xfa:embed="#floatingField011942" xfa:embedMode="raw" xfa:embedType="uri"/></span></p></body>
+                        </exData>
+                     </value>
+                     <font baselineShift="0pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                  </draw>
+                  <draw h="19.05mm" name="Note" w="203.2mm" y="75.745mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <value>
+                        <text xliff:rid="647EE8AC-C680-4D7C-8F7A-CE6BE79E19E2">1.In case of any discrepancies, please contact DelVal USA office. If no response is received within the next 48 hours, we will consider this invoice  accepted. 2.This is an electronic invoice copy. No signature is required. </text>
+                     </value>
+                     <font baselineShift="0pt" size="9pt" typeface="Times New Roman" weight="bold"/>
+                     <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                     <para lineHeight="12pt" marginLeft="4.25pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt"/>
+                     <?renderCache.bounds 573166 51166 0 0 1417 1417 0 0?>
+                     <?renderCache.textRun 150 1.In case of any discrepancies, please contact DelVal USA office. If no response is received within the next 48 hours, we will consider this invoice   0 5667 8475 0 0 0 "Times New Roman" 1 0 9000 ISO-8859-1?>
+                     <?renderCache.textRun 10 accepted.  0 5667 20475 0 0 0 "Times New Roman" 1 0 9000 ISO-8859-1?>
+                     <?renderCache.textRun 64 2.This is an electronic invoice copy. No signature is required.  0 5667 32475 0 0 0 "Times New Roman" 1 0 9000 ISO-8859-1?></draw>
+                  <?templateDesigner expand 1?></subform>
+            </subform>
+            <?templateDesigner expand 1?></subform>
+         <?templateDesigner expand 1?></subform>
+      <proto/>
+      <desc>
+         <text name="version">11.0.9.20211220.1.16.2</text>
+      </desc>
+      <?templateDesigner expand 1?>
+      <?renderCache.subset "Arial" 0 0 ISO-8859-1 4 16 4 003700480057005BTetx?>
+      <?renderCache.subset "Times New Roman" 0 0 ISO-8859-1 4 240 60 00030007000F001000110013001400150016001700180019001A001C001D0023002400250026002700280029002A002C002E002F003000310032003300350036003700380039003B003C003D004200440046004700480049004C004F005000510052005300550056005700580059005A005B005E005F0060 $,-.012345679:@ABCDEFGIKLMNOPRSTUVXYZ_acdefilmnoprstuvwx{|}?>
+      <?renderCache.subset "Times New Roman" 1 0 ISO-8859-1 4 208 52 0003000F0011001400150017001B001D0024002600270028002A002B002C002F0030003100320033003400350036003700380039004400450046004700480049004A004B004C004E004F0050005100520053005400550056005700580059005A005B005C005E0060 ,.1248:ACDEGHILMNOPQRSTUVabcdefghiklmnopqrstuvwxy{}?></subform>
+   <?templateDesigner DefaultPreviewDynamic 1?>
+   <?templateDesigner DefaultRunAt client?>
+   <?templateDesigner WidowOrphanControl 0?>
+   <?templateDesigner DefaultCaptionFontSettings face:Arial;size:10;weight:normal;style:normal?>
+   <?templateDesigner DefaultValueFontSettings face:Arial;size:10;weight:normal;style:normal?>
+   <?templateDesigner DefaultLanguage JavaScript?>
+   <?acrobat JavaScript strictScoping?>
+   <?templateDesigner FormTargetVersion 33?>
+   <?templateDesigner Zoom 98?>
+   <?templateDesigner Grid show:1, snap:1, units:3, color:ff8080, origin:(0,0), interval:(9000,9000), objsnap:0, guidesnap:0, pagecentersnap:0?>
+   <?templateDesigner Rulers horizontal:1, vertical:1, guidelines:1, crosshairs:0?></template>
+<config xmlns="http://www.xfa.org/schema/xci/3.0/">
+   <agent name="designer">
+      <!--  [0..n]  -->
+      <destination>pdf</destination>
+      <pdf>
+         <!--  [0..n]  -->
+         <fontInfo/>
+      </pdf>
+      <common>
+         <template>
+            <base>https://vhdvfdevap01.sap.delvalflow.com:44300/sap/bc/fp/form/layout/</base>
+         </template>
+      </common>
+   </agent>
+   <present>
+      <!--  [0..n]  -->
+      <pdf>
+         <!--  [0..n]  -->
+         <version>1.7</version>
+         <adobeExtensionLevel>8</adobeExtensionLevel>
+      </pdf>
+      <common>
+         <data>
+            <xsl>
+               <uri/>
+            </xsl>
+            <outputXSL>
+               <uri/>
+            </outputXSL>
+         </data>
+      </common>
+      <xdp>
+         <packets>*</packets>
+      </xdp>
+   </present>
+</config>
+<connectionSet xmlns="http://www.xfa.org/schema/xfa-connection-set/2.8/">
+   <xsdConnection dataDescription="data" name="ZUS_FI_INVOICE_AF">
+      <uri/>
+      <rootElement>data</rootElement>
+   </xsdConnection>
+</connectionSet>
+<xfa:datasets xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/">
+   <xfa:data xfa:dataNode="dataGroup"/>
+   <dd:dataDescription xmlns:dd="http://ns.adobe.com/data-description/" dd:name="data">
+      <data>
+         <LOGO>
+            <COMPANY_LOGO/>
+         </LOGO>
+         <ADDRESS>
+            <GS_ADRC>
+               <NAME1/>
+               <CITY1/>
+               <POST_CODE1/>
+               <STREET/>
+               <REGION/>
+               <TEL_NUMBER/>
+               <FAX_NUMBER/>
+            </GS_ADRC>
+         </ADDRESS>
+         <SHIP_TO_ADDRESS>
+            <GS_ADRC_SP>
+               <NAME1/>
+               <CITY1/>
+               <POST_CODE1/>
+               <STREET/>
+               <STR_SUPPL1/>
+               <STR_SUPPL2/>
+               <COUNTRY/>
+               <REGION/>
+            </GS_ADRC_SP>
+            <GV_EMAIL/>
+         </SHIP_TO_ADDRESS>
+         <INVOICE_DETAILS>
+            <GV_INV_NO/>
+            <GV_INV_DATE/>
+            <GV_DUE_DATE/>
+         </INVOICE_DETAILS>
+         <SUPPLIER>
+            <GV_CUSTOMER/>
+            <GV_ZTERM/>
+            <GV_REF/>
+         </SUPPLIER>
+         <MAIN_TABLE>
+            <GT_BSEG dd:minOccur="0">
+               <DATA dd:maxOccur="-1">
+                  <BUZEI/>
+                  <DMBTR/>
+                  <SGTXT/>
+                  <HKONT/>
+                  <AMT/>
+               </DATA>
+            </GT_BSEG>
+         </MAIN_TABLE>
+         <FOOTER>
+            <GV_TOTAL/>
+            <GV_REMARK/>
+         </FOOTER>
+      </data>
+   </dd:dataDescription>
+</xfa:datasets>
+<localeSet xmlns="http://www.xfa.org/schema/xfa-locale-set/2.7/">
+   <locale desc="English (United States)" name="en_US">
+      <calendarSymbols name="gregorian">
+         <monthNames>
+            <month>January</month>
+            <month>February</month>
+            <month>March</month>
+            <month>April</month>
+            <month>May</month>
+            <month>June</month>
+            <month>July</month>
+            <month>August</month>
+            <month>September</month>
+            <month>October</month>
+            <month>November</month>
+            <month>December</month>
+         </monthNames>
+         <monthNames abbr="1">
+            <month>Jan</month>
+            <month>Feb</month>
+            <month>Mar</month>
+            <month>Apr</month>
+            <month>May</month>
+            <month>Jun</month>
+            <month>Jul</month>
+            <month>Aug</month>
+            <month>Sep</month>
+            <month>Oct</month>
+            <month>Nov</month>
+            <month>Dec</month>
+         </monthNames>
+         <dayNames>
+            <day>Sunday</day>
+            <day>Monday</day>
+            <day>Tuesday</day>
+            <day>Wednesday</day>
+            <day>Thursday</day>
+            <day>Friday</day>
+            <day>Saturday</day>
+         </dayNames>
+         <dayNames abbr="1">
+            <day>Sun</day>
+            <day>Mon</day>
+            <day>Tue</day>
+            <day>Wed</day>
+            <day>Thu</day>
+            <day>Fri</day>
+            <day>Sat</day>
+         </dayNames>
+         <meridiemNames>
+            <meridiem>AM</meridiem>
+            <meridiem>PM</meridiem>
+         </meridiemNames>
+         <eraNames>
+            <era>BC</era>
+            <era>AD</era>
+         </eraNames>
+      </calendarSymbols>
+      <datePatterns>
+         <datePattern name="full">EEEE, MMMM D, YYYY</datePattern>
+         <datePattern name="long">MMMM D, YYYY</datePattern>
+         <datePattern name="med">MMM D, YYYY</datePattern>
+         <datePattern name="short">M/D/YY</datePattern>
+      </datePatterns>
+      <timePatterns>
+         <timePattern name="full">h:MM:SS A Z</timePattern>
+         <timePattern name="long">h:MM:SS A Z</timePattern>
+         <timePattern name="med">h:MM:SS A</timePattern>
+         <timePattern name="short">h:MM A</timePattern>
+      </timePatterns>
+      <dateTimeSymbols>GyMdkHmsSEDFwWahKzZ</dateTimeSymbols>
+      <numberPatterns>
+         <numberPattern name="numeric">z,zz9.zzz</numberPattern>
+         <numberPattern name="currency">$z,zz9.99|($z,zz9.99)</numberPattern>
+         <numberPattern name="percent">z,zz9%</numberPattern>
+      </numberPatterns>
+      <numberSymbols>
+         <numberSymbol name="decimal">.</numberSymbol>
+         <numberSymbol name="grouping">,</numberSymbol>
+         <numberSymbol name="percent">%</numberSymbol>
+         <numberSymbol name="minus">-</numberSymbol>
+         <numberSymbol name="zero">0</numberSymbol>
+      </numberSymbols>
+      <currencySymbols>
+         <currencySymbol name="symbol">$</currencySymbol>
+         <currencySymbol name="isoname">USD</currencySymbol>
+         <currencySymbol name="decimal">.</currencySymbol>
+      </currencySymbols>
+      <typefaces>
+         <typeface name="Myriad Pro"/>
+         <typeface name="Minion Pro"/>
+         <typeface name="Courier Std"/>
+         <typeface name="Adobe Pi Std"/>
+         <typeface name="Adobe Hebrew"/>
+         <typeface name="Adobe Arabic"/>
+         <typeface name="Adobe Thai"/>
+         <typeface name="Kozuka Gothic Pro-VI M"/>
+         <typeface name="Kozuka Mincho Pro-VI R"/>
+         <typeface name="Adobe Ming Std L"/>
+         <typeface name="Adobe Song Std L"/>
+         <typeface name="Adobe Myungjo Std M"/>
+         <typeface name="Adobe Devanagari"/>
+      </typefaces>
+   </locale>
+</localeSet>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c015 81.161580, 2017/12/01-01:38:21        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:pdf="http://ns.adobe.com/pdf/1.3/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:desc="http://ns.adobe.com/xfa/promoted-desc/" rdf:about="">
+         <xmp:MetadataDate>2025-07-31T11:24:49Z</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe LiveCycle Designer 11.0</xmp:CreatorTool>
+         <pdf:Producer>Adobe LiveCycle Designer 11.0</pdf:Producer>
+         <xmpMM:DocumentID>uuid:3393705b-7eed-45e8-948f-4ac75ac86737</xmpMM:DocumentID>
+         <desc:version rdf:parseType="Resource">
+            <rdf:value>11.0.9.20211220.1.16.2</rdf:value>
+            <desc:ref>/template/subform[1]</desc:ref>
+         </desc:version>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta></xdp:xdp>

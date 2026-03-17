@@ -1,0 +1,35 @@
+
+READ TABLE it_lips INTO wa_lips  index 1.
+
+SELECT SINGLE * FROM vbak INTO wa_vbak
+  WHERE vbeln = wa_lips-vgbel.
+
+
+SELECT SINGLE * FROM vbkd INTO wa_vbkd
+  WHERE vbeln = wa_vbak-vbeln.
+
+SELECT SINGLE * FROM TVZBT INTO WA_TVZBT
+  WHERE ZTERM = WA_VBKD-ZTERM AND SPRAS = 'E'.
+
+
+SELECT SINGLE * FROM kna1 INTO wa_sale
+  WHERE kunnr = wa_hdr-SOLD_TO_PARTY.
+*
+*CALL FUNCTION 'CONVERSION_EXIT_IDATE_OUTPUT'
+*    EXPORTING
+*      input         = WA_LIKP-LFDAT
+*   IMPORTING
+*     OUTPUT        = GV_SHIP_DATE
+            .
+*TRANSLATE GV_SHIP_DATE+1(2) TO LOWER CASE.
+*TRANSLATE GV_SHIP_DATE+2(1) TO UPPER CASE.
+CONCATENATE  WA_LIKP-LFDAT+4(2) WA_LIKP-LFDAT+6(2)
+ WA_LIKP-LFDAT+0(4)
+                INTO GV_SHIP_DATE SEPARATED BY '.'.
+
+
+
+
+
+
+

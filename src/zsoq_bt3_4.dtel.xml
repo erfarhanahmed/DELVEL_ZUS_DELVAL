@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZSOQ_BT3_4</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DOMNAME>MENG13</DOMNAME>
+    <HEADLEN>28</HEADLEN>
+    <SCRLEN1>08</SCRLEN1>
+    <SCRLEN2>17</SCRLEN2>
+    <SCRLEN3>26</SCRLEN3>
+    <DDTEXT>Sales Order Stock (3-4 Year)</DDTEXT>
+    <REPTEXT>Sales Order Stock (3-4 Year)</REPTEXT>
+    <SCRTEXT_S>S(3-4 Y)</SCRTEXT_S>
+    <SCRTEXT_M>SO Stc.(3-4 Year)</SCRTEXT_M>
+    <SCRTEXT_L>Sales Ordr Stc. (3-4 Year)</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

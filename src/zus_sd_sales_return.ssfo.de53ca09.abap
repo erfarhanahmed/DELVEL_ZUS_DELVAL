@@ -1,0 +1,27 @@
+
+SELECT SINGLE * FROM vbap INTO wa_vbap
+  WHERE VBELN = IS_VBDKA-VBELN
+    AND posnr = wa_final-posnr
+    AND matnr = wa_final-matnr.
+
+*CALL FUNCTION 'CONVERSION_EXIT_IDATE_OUTPUT'
+*    EXPORTING
+*      input         = WA_VBAP-CUSTDELDATE
+*   IMPORTING
+*     OUTPUT        = GV_SHIP_D
+            .
+*TRANSLATE GV_SHIP_D+1(2) TO LOWER CASE.
+*TRANSLATE GV_SHIP_D+2(1) TO UPPER CASE.
+CONCATENATE  WA_VBAP-CUSTDELDATE+4(2) WA_VBAP-CUSTDELDATE+06(2)
+ WA_VBAP-CUSTDELDATE+0(4)
+                INTO GV_SHIP_D SEPARATED BY '.'.
+
+
+
+
+
+
+
+
+
+

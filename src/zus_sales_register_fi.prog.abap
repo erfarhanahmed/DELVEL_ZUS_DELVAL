@@ -1,0 +1,1914 @@
+*&---------------------------------------------------------------------*
+*& Report ZUS_FI_SALES_REGISTER
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZUS_SALES_REGISTER_FI.
+
+TYPE-POOLS:SLIS.
+TABLES BKPF.
+
+DATA:
+  TMP_BELNR TYPE BKPF-BELNR,
+  TMP_BUDAT TYPE BKPF-BUDAT,
+  TMP_GJAHR TYPE BKPF-GJAHR.
+
+TYPES:
+  BEGIN OF T_ACCOUNTING_DOC_HDR,
+    BUKRS TYPE BKPF-BUKRS,
+    BELNR TYPE BKPF-BELNR,
+    GJAHR TYPE BKPF-GJAHR,
+    BLART TYPE BKPF-BLART,
+    BUDAT TYPE BKPF-BUDAT,
+    XBLNR TYPE BKPF-XBLNR,
+    BKTXT TYPE BKPF-BKTXT,
+    WAERS TYPE BKPF-WAERS,
+    KURSF TYPE BKPF-KURSF,
+    STBLG TYPE BKPF-STBLG,
+    TCODE TYPE BKPF-TCODE,
+  END OF T_ACCOUNTING_DOC_HDR,
+  TT_ACCOUNTING_DOC_HDR TYPE STANDARD TABLE OF T_ACCOUNTING_DOC_HDR.
+
+TYPES:
+  BEGIN OF T_ACCOUNTING_DOC_ITEM,
+    BUKRS   TYPE BSEG-BUKRS,
+    BELNR   TYPE BSEG-BELNR,
+    GJAHR   TYPE BSEG-GJAHR,
+    BUZEI   TYPE BSEG-BUZEI,
+    BUZID   TYPE BSEG-BUZID,
+    UMSKZ   TYPE BSEG-UMSKZ,
+    SHKZG   TYPE BSEG-SHKZG,
+    MWSKZ   TYPE BSEG-MWSKZ,
+    DMBTR   TYPE BSEG-DMBTR,
+    WRBTR   TYPE BSEG-WRBTR,
+    TXGRP   TYPE BSEG-TXGRP,
+    KTOSL   TYPE BSEG-KTOSL,
+    ZUONR   TYPE BSEG-ZUONR,
+    SGTXT   TYPE BSEG-SGTXT,
+    SAKNR   TYPE BSEG-SAKNR,
+    HKONT   TYPE BSEG-HKONT,
+    KUNNR   TYPE BSEG-KUNNR,
+    XBILK   TYPE BSEG-XBILK,
+    HSN_SAC TYPE BSEG-HSN_SAC,
+    KOART   TYPE BSEG-KOART,
+  END OF T_ACCOUNTING_DOC_ITEM,
+  TT_ACCOUNTING_DOC_ITEM TYPE STANDARD TABLE OF T_ACCOUNTING_DOC_ITEM.
+
+TYPES:
+  BEGIN OF T_BSET,
+    BUKRS TYPE BSET-BUKRS,
+    BELNR TYPE BSET-BELNR,
+    GJAHR TYPE BSET-GJAHR,
+    BUZEI TYPE BSET-BUZEI,
+    SHKZG TYPE BSET-SHKZG,
+    HWBAS TYPE BSET-HWBAS,
+    FWBAS TYPE BSET-FWBAS,
+    HWSTE TYPE BSET-HWSTE,
+    KSCHL TYPE BSET-KSCHL,
+    KBETR TYPE BSET-KBETR,
+    MWSKZ TYPE BSET-MWSKZ,
+  END OF T_BSET,
+  TT_BSET TYPE STANDARD TABLE OF T_BSET.
+
+
+TYPES:
+  BEGIN OF T_CUST_INFO,
+    KUNNR TYPE KNA1-KUNNR,
+    NAME1 TYPE KNA1-NAME1,
+    ORT01 TYPE KNA1-ORT01,
+    PSTLZ TYPE KNA1-PSTLZ,
+    LAND1 TYPE KNA1-LAND1,
+    REGIO TYPE KNA1-REGIO,
+    ADRNR TYPE KNA1-ADRNR,
+    STCD3 TYPE KNA1-STCD3,
+    BRSCH TYPE KNA1-BRSCH,
+  END OF T_CUST_INFO,
+  TT_CUST_INFO TYPE STANDARD TABLE OF T_CUST_INFO.
+
+
+
+TYPES:BEGIN OF TY_KNVV,
+        KUNNR TYPE KNVV-KUNNR,
+        KDGRP TYPE KNVV-KDGRP,
+        BZIRK TYPE KNVV-BZIRK,
+        VKBUR TYPE KNVV-VKBUR,
+      END OF TY_KNVV.
+
+TYPES:BEGIN OF TY_T016T,
+        SPRAS TYPE T016T-SPRAS,
+        BRSCH TYPE T016T-BRSCH,
+        BRTXT TYPE T016T-BRTXT,
+      END OF TY_T016T,
+
+      BEGIN OF TY_TVKBT,
+        SPRAS TYPE TVKBT-SPRAS,
+        VKBUR TYPE TVKBT-VKBUR,
+        BEZEI TYPE TVKBT-BEZEI,
+      END OF TY_TVKBT,
+
+      BEGIN OF TY_T171T,
+        SPRAS TYPE T171T-SPRAS,
+        BZIRK TYPE T171T-BZIRK,
+        BZTXT TYPE T171T-BZTXT,
+      END OF TY_T171T,
+
+      BEGIN OF TY_T151T,
+        SPRAS TYPE T151T-SPRAS,
+        KDGRP TYPE T151T-KDGRP,
+        KTEXT TYPE T151T-KTEXT,
+      END OF TY_T151T.
+
+TYPES:
+  BEGIN OF T_T005U,
+    LAND1 TYPE T005U-LAND1,
+    BLAND TYPE T005U-BLAND,
+    BEZEI TYPE ZGST_REGION-BEZEI,
+  END OF T_T005U,
+  TT_T005U TYPE STANDARD TABLE OF T_T005U.
+
+TYPES:
+  BEGIN OF T_ZGST_REGION,
+    GST_REGION TYPE ZGST_REGION-GST_REGION,
+    BEZEI      TYPE ZGST_REGION-BEZEI,
+  END OF T_ZGST_REGION,
+  TT_ZGST_REGION TYPE STANDARD TABLE OF T_ZGST_REGION.
+
+TYPES:
+  BEGIN OF T_ADRC,
+    ADDRNUMBER TYPE ADRC-ADDRNUMBER,
+    NAME1      TYPE ADRC-NAME1,
+    CITY2      TYPE ADRC-CITY2,
+    POST_CODE1 TYPE ADRC-POST_CODE1,
+    STREET     TYPE ADRC-STREET,
+    STR_SUPPL1 TYPE ADRC-STR_SUPPL1,
+    STR_SUPPL2 TYPE ADRC-STR_SUPPL2,
+    STR_SUPPL3 TYPE ADRC-STR_SUPPL3,
+    LOCATION   TYPE ADRC-LOCATION,
+    COUNTRY    TYPE ADRC-COUNTRY,
+  END OF T_ADRC,
+  TT_ADRC TYPE STANDARD TABLE OF T_ADRC.
+
+TYPES:
+  BEGIN OF T_KNVI,
+    KUNNR TYPE KNVI-KUNNR,
+    TAXKD TYPE KNVI-TAXKD,
+  END OF T_KNVI,
+  TT_KNVI TYPE STANDARD TABLE OF T_KNVI.
+
+TYPES:
+  BEGIN OF T_TSKDT,
+    TATYP TYPE TSKDT-TATYP,
+    TAXKD TYPE TSKDT-TAXKD,
+    VTEXT TYPE TSKDT-VTEXT,
+  END OF T_TSKDT,
+  TT_TSKDT TYPE STANDARD TABLE OF T_TSKDT.
+
+TYPES:
+  BEGIN OF T_T007S,
+    MWSKZ TYPE T007S-MWSKZ,
+    TEXT1 TYPE T007S-TEXT1,
+  END OF T_T007S,
+  TT_T007S TYPE STANDARD TABLE OF T_T007S.
+
+TYPES:
+  BEGIN OF T_SKAT,
+    SAKNR TYPE SKAT-SAKNR,
+    TXT20 TYPE SKAT-TXT20,
+  END OF T_SKAT,
+  TT_SKAT TYPE STANDARD TABLE OF T_SKAT.
+
+TYPES:
+  BEGIN OF T_FINAL,
+    BELNR      TYPE BKPF-BELNR,
+    BUDAT      TYPE BKPF-BUDAT,
+    BLART      TYPE BKPF-BLART,
+    BKTXT      TYPE BKPF-BKTXT,
+    XBLNR      TYPE BKPF-XBLNR,
+    KUNNR      TYPE BSEG-KUNNR,
+    NAME1      TYPE KNA1-NAME1,
+    VTEXT      TYPE TSKDT-VTEXT,
+    STCD3      TYPE KNA1-STCD3,
+    GST_REGION TYPE ZGST_REGION-GST_REGION,
+    BEZEI      TYPE ZGST_REGION-BEZEI,
+    SGTXT      TYPE BSEG-SGTXT,
+    HSN_SAC    TYPE BSEG-HSN_SAC,
+    MWSKZ      TYPE T007S-MWSKZ,
+    TEXT1      TYPE T007S-TEXT1,
+    FWBAS      TYPE BSET-FWBAS,
+    WAERS      TYPE BKPF-WAERS,
+    KURSF      TYPE BKPF-KURSF,
+    HWBAS      TYPE BSET-HWBAS,
+    ULOC_P     TYPE PRCD_ELEMENTS-KBETR,              "ULOC %
+    ULOC       TYPE PRCD_ELEMENTS-KWERT,        "ULOC
+    USTA_P     TYPE PRCD_ELEMENTS-KBETR,              "USTA %
+    USTA       TYPE PRCD_ELEMENTS-KWERT,        "USTA
+    UCOU_P     TYPE PRCD_ELEMENTS-KBETR,              "UCOU %
+    UCOU       TYPE PRCD_ELEMENTS-KWERT,        "UCOU
+    TOT        TYPE PRCD_ELEMENTS-KWERT,        "Grand Total
+    SAKNR      TYPE SKAT-SAKNR,
+    TXT20      TYPE SKAT-TXT20,
+    ADDRESS    TYPE STRING,
+    GJAHR      TYPE BKPF-GJAHR,
+    KDGRP      TYPE KNVV-KDGRP,
+    SALE_OFF   TYPE KNVV-VKBUR,
+    BZIRK      TYPE KNVV-BZIRK,
+    BRSCH      TYPE KNA1-BRSCH,
+    KTEXT      TYPE CHAR25,
+    ORG_UNIT   TYPE CHAR25,
+    BZTXT      TYPE CHAR25,
+    BRTXT      TYPE CHAR25,
+    REF_DATE   TYPE STRING,              " Abhishek Pisolkar (26.03.2018)
+    FI_DES     TYPE CHAR100,
+    ORT01      TYPE KNA1-ORT01,
+    PSTLZ      TYPE KNA1-PSTLZ,
+    STBLG      TYPE BKPF-STBLG,
+    DATE       TYPE BKPF-BUDAT,
+  END OF T_FINAL,
+  TT_FINAL TYPE STANDARD TABLE OF T_FINAL.
+DATA:
+  GT_FINAL TYPE TT_FINAL.
+*----------------Download file------------------------------
+TYPES:
+  BEGIN OF TY_FINAL ,
+    BELNR      TYPE STRING, "bkpf-belnr,
+    BUDAT      TYPE STRING, "char10, "bkpf-budat,
+    BLART      TYPE STRING, "bkpf-blart,
+    XBLNR      TYPE STRING, "bkpf-xblnr,
+    KUNNR      TYPE STRING, "bseg-kunnr,
+    NAME1      TYPE STRING, "kna1-name1,
+    KDGRP      TYPE KNVV-KDGRP,
+    KTEXT      TYPE CHAR25,
+    SALE_OFF   TYPE KNVV-VKBUR,
+    ORG_UNIT   TYPE CHAR25,
+    BZIRK      TYPE KNVV-BZIRK,
+    BZTXT      TYPE CHAR25,
+    BRSCH      TYPE KNA1-BRSCH,
+    BRTXT      TYPE CHAR25,
+    GST_REGION TYPE STRING, "zgst_region-gst_region,
+    BEZEI      TYPE STRING, "zgst_region-bezei,
+    SGTXT      TYPE STRING, "bseg-sgtxt,
+    MWSKZ      TYPE STRING, "t007s-mwskz,
+    TEXT1      TYPE STRING, "t007s-text1,
+    FWBAS      TYPE STRING, "string, "bset-fwbas,
+    WAERS      TYPE STRING, "bkpf-waers,
+    HWBAS      TYPE STRING, "string,"bset-hwbas,
+    ULOC_P     TYPE STRING, "string,"konv-kbetr,              "ULOC %
+    ULOC       TYPE STRING, "string,"konv-kwert,        "ULOC
+    USTA_P     TYPE STRING, "string,"konv-kbetr,              "USTA %
+    USTA       TYPE STRING, "string,"konv-kwert,        "USTA
+    UCOU_P     TYPE STRING, "string,"konv-kbetr,              "UCOU %
+    UCOU       TYPE STRING, "string,"konv-kwert,        "UCOU
+    TOT        TYPE STRING, "string,"konv-kwert,        "Grand Total
+    SAKNR      TYPE STRING, "skat-saknr,
+    TXT20      TYPE STRING, "skat-txt20,
+
+    REF_DATE   TYPE STRING, "string,
+    FI_DES     TYPE CHAR100,
+    ORT01      TYPE CHAR35,
+    PSTLZ      TYPE CHAR10,
+    STBLG      TYPE CHAR20,
+    DATE       TYPE CHAR11,
+  END OF TY_FINAL.
+
+DATA : IT_FINAL TYPE TABLE OF TY_FINAL,
+       WA_FINAL TYPE TY_FINAL.
+*--------------------------------------------------------------------*
+TYPES : BEGIN OF LS_FIELDNAME,
+          FIELD_NAME(25),
+        END OF LS_FIELDNAME.
+
+DATA : IT_FIELDNAME TYPE TABLE OF LS_FIELDNAME.
+DATA : WA_FIELDNAME TYPE LS_FIELDNAME.
+
+TYPES : BEGIN OF TY_BLART,
+          BLART TYPE BKPF-BLART,
+        END OF TY_BLART.
+DATA : IT_BLART TYPE TABLE OF TY_BLART,
+       WA_BLART TYPE TY_BLART.
+SELECTION-SCREEN: BEGIN OF BLOCK B1 WITH FRAME TITLE XYZ.
+  SELECT-OPTIONS: SO_BELNR FOR TMP_BELNR,
+                  SO_BUDAT FOR TMP_BUDAT DEFAULT '20190101' TO SY-DATUM,
+                  SO_GJAHR FOR TMP_GJAHR DEFAULT '2018',
+                  S_BLART FOR BKPF-BLART.
+  PARAMETERS P_BUKRS TYPE BKPF-BUKRS OBLIGATORY DEFAULT 'US00'.
+SELECTION-SCREEN: END OF BLOCK B1.
+
+SELECTION-SCREEN BEGIN OF BLOCK B5 WITH FRAME TITLE ABC .
+  PARAMETERS P_DOWN AS CHECKBOX.
+  PARAMETERS P_FOLDER LIKE RLGRAP-FILENAME DEFAULT '/Delval/India'."India'."usa'.
+SELECTION-SCREEN END OF BLOCK B5.
+
+*****************************************************************************NEW ADD CODE ***********************************************
+AT SELECTION-SCREEN ON VALUE-REQUEST FOR S_BLART-LOW.
+
+  SELECT DISTINCT BLART FROM BKPF INTO TABLE IT_BLART WHERE BLART IN ('RV','DG','DR').
+  CALL FUNCTION 'F4IF_INT_TABLE_VALUE_REQUEST'
+    EXPORTING
+*     DDIC_STRUCTURE  = ' '
+      RETFIELD        = 'BLART'
+*     PVALKEY         = ' '
+      DYNPPROG        = SY-CPROG
+      DYNPNR          = SY-DYNNR
+      DYNPROFIELD     = 'S_BLART'
+      VALUE_ORG       = 'S'
+    TABLES
+      VALUE_TAB       = IT_BLART
+*     FIELD_TAB       =
+*     RETURN_TAB      =
+*     DYNPFLD_MAPPING =
+    EXCEPTIONS
+      PARAMETER_ERROR = 1
+      NO_VALUES_FOUND = 2
+      OTHERS          = 3.
+  IF SY-SUBRC <> 0.
+* Implement suitable error handling here
+  ENDIF.
+
+AT SELECTION-SCREEN ON VALUE-REQUEST FOR S_BLART-HIGH.
+*  SELECT blart from bkpf INTO TABLE it_blart WHERE blart in ('RV','DG','DR').
+  CALL FUNCTION 'F4IF_INT_TABLE_VALUE_REQUEST'
+    EXPORTING
+*     DDIC_STRUCTURE  = ' '
+      RETFIELD        = 'BLART'
+*     PVALKEY         = ' '
+      DYNPPROG        = SY-CPROG
+      DYNPNR          = SY-DYNNR
+      DYNPROFIELD     = 'S_BLART'
+      VALUE_ORG       = 'S'
+    TABLES
+      VALUE_TAB       = IT_BLART
+*     FIELD_TAB       =
+*     RETURN_TAB      =
+*     DYNPFLD_MAPPING =
+    EXCEPTIONS
+      PARAMETER_ERROR = 1
+      NO_VALUES_FOUND = 2
+      OTHERS          = 3.
+  IF SY-SUBRC <> 0.
+* Implement suitable error handling here
+  ENDIF.
+
+*SELECTION-SCREEN BEGIN OF BLOCK b6 WITH FRAME TITLE pqr .
+*PARAMETERS p_own AS CHECKBOX.
+**PARAMETERS p_folder LIKE rlgrap-filename DEFAULT 'E:\delval\temp'.
+*SELECTION-SCREEN END OF BLOCK b6.
+
+
+INITIALIZATION.
+  XYZ = 'Select Options'(tt1).
+  ABC = 'Download File'(tt2).
+*  pqr = 'Download File to Own PC'(tt3)."ADD CODE 23.03.2018
+
+START-OF-SELECTION.
+
+  IF P_BUKRS = 'US00'..
+    PERFORM GET_DATA CHANGING GT_FINAL.
+    PERFORM DISPLAY USING GT_FINAL.
+  ELSE.
+    MESSAGE 'This Report Valid For US00 Company Code' TYPE 'E'.
+  ENDIF.
+
+*&---------------------------------------------------------------------*
+*&      Form  GET_DATA
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*      <--P_GT_FINAL  text
+*----------------------------------------------------------------------*
+FORM GET_DATA  CHANGING CT_FINAL TYPE TT_FINAL.
+  DATA:
+    LT_ACCOUNTING_DOC_HDR  TYPE TT_ACCOUNTING_DOC_HDR,
+    LT_BKPF                TYPE TT_ACCOUNTING_DOC_HDR,
+    LS_BKPF                TYPE T_ACCOUNTING_DOC_HDR,
+    LS_ACCOUNTING_DOC_HDR  TYPE T_ACCOUNTING_DOC_HDR,
+    LT_ACCOUNTING_DOC_ITEM TYPE TT_ACCOUNTING_DOC_ITEM,
+    LT_ACCOUNTING_DOC_ITM1 TYPE TT_ACCOUNTING_DOC_ITEM,
+    LS_ACCOUNTING_DOC_ITM1 TYPE T_ACCOUNTING_DOC_ITEM,
+    LS_ACCOUNTING_DOC_ITM2 TYPE T_ACCOUNTING_DOC_ITEM,
+    LS_ACCOUNTING_DOC_ITM3 TYPE T_ACCOUNTING_DOC_ITEM,
+    LS_ACCOUNTING_DOC_ITEM TYPE T_ACCOUNTING_DOC_ITEM,
+    LT_BSET                TYPE TT_BSET,
+    LS_BSET                TYPE T_BSET,
+    LT_CUST_INFO           TYPE TT_CUST_INFO,
+    LS_CUST_INFO           TYPE T_CUST_INFO,
+    LT_T005U               TYPE TT_T005U,
+    LS_T005U               TYPE T_T005U,
+    LT_ZGST_REGION         TYPE TT_ZGST_REGION,
+    LS_ZGST_REGION         TYPE T_ZGST_REGION,
+    LT_KNVI                TYPE TT_KNVI,
+    LS_KNVI                TYPE T_KNVI,
+    LT_TSKDT               TYPE TT_TSKDT,
+    LS_TSKDT               TYPE T_TSKDT,
+    LT_T007S               TYPE TT_T007S,
+    LS_T007S               TYPE T_T007S,
+    LT_SKAT                TYPE TT_SKAT,
+    LS_SKAT                TYPE T_SKAT,
+    LS_FINAL               TYPE T_FINAL,
+    LV_INDEX               TYPE SY-TABIX,
+    LV_SHKZG               TYPE C,
+    LT_ADRC                TYPE TT_ADRC,
+    LS_ADRC                TYPE T_ADRC.
+
+  DATA:IT_KNVV  TYPE TABLE OF TY_KNVV,
+       WA_KNVV  TYPE          TY_KNVV,
+
+       IT_T016T TYPE TABLE OF TY_T016T,
+       WA_T016T TYPE          TY_T016T,
+
+       IT_TVKBT TYPE TABLE OF TY_TVKBT,
+       WA_TVKBT TYPE          TY_TVKBT,
+
+       IT_T171T TYPE TABLE OF TY_T171T,
+       WA_T171T TYPE          TY_T171T,
+
+       IT_T151T TYPE TABLE OF TY_T151T,
+       WA_T151T TYPE          TY_T151T.
+
+
+
+  IF S_BLART IS NOT INITIAL.
+
+    SELECT BUKRS
+           BELNR
+           GJAHR
+           BLART
+           BUDAT
+           XBLNR
+           BKTXT
+           WAERS
+           KURSF
+           STBLG
+           TCODE
+      FROM BKPF
+      INTO TABLE LT_ACCOUNTING_DOC_HDR
+      WHERE BELNR IN SO_BELNR
+      AND   GJAHR IN SO_GJAHR
+      AND   BUDAT IN SO_BUDAT
+      AND   BLART IN S_BLART       "('RV','DG','DR') "DA AB
+      AND   BUKRS = P_BUKRS
+    AND   TCODE IN ('FB70','FB75','FB05','FB08','FBVB','FB01','FV70','FV75' )." ,'FBCJ','FB1D'). "FBCJ FB1D
+  ELSE.
+
+    SELECT BUKRS
+           BELNR
+           GJAHR
+           BLART
+           BUDAT
+           XBLNR
+           BKTXT
+           WAERS
+           KURSF
+           STBLG
+           TCODE
+      FROM BKPF
+      INTO TABLE LT_ACCOUNTING_DOC_HDR
+      WHERE BELNR IN SO_BELNR
+      AND   GJAHR IN SO_GJAHR
+      AND   BUDAT IN SO_BUDAT
+      AND   BUKRS = P_BUKRS
+      AND   BLART IN ('RV','DG','DR','UE') "DA AB
+    AND   TCODE IN ('FB70','FB75','FB05','FB08','FBVB','FB01','FV70','FV75' )." ,'FBCJ','FB1D'). "FBCJ FB1D
+  ENDIF.
+  IF NOT SY-SUBRC IS INITIAL.
+    MESSAGE 'Data Not Found' TYPE 'E'.
+  ENDIF.
+
+  IF NOT LT_ACCOUNTING_DOC_HDR IS INITIAL.
+
+    SELECT BUKRS
+           BELNR
+           GJAHR
+           BUZEI
+           BUZID
+           UMSKZ
+           SHKZG
+           MWSKZ
+           DMBTR
+           WRBTR
+           TXGRP
+           KTOSL
+           ZUONR
+           SGTXT
+           SAKNR
+           HKONT
+           KUNNR
+           XBILK
+           HSN_SAC
+           KOART
+      FROM BSEG
+      INTO TABLE LT_ACCOUNTING_DOC_ITEM
+      FOR ALL ENTRIES IN LT_ACCOUNTING_DOC_HDR
+      WHERE BELNR = LT_ACCOUNTING_DOC_HDR-BELNR
+    AND   GJAHR = LT_ACCOUNTING_DOC_HDR-GJAHR
+      AND UMSKZ = ' '
+      AND   BUKRS = P_BUKRS.
+
+    SELECT BUKRS
+           BELNR
+           GJAHR
+           BUZEI
+           SHKZG
+           HWBAS
+           FWBAS
+           HWSTE
+           KSCHL
+           KBETR
+           MWSKZ
+      FROM BSET
+      INTO TABLE LT_BSET
+      FOR ALL ENTRIES IN LT_ACCOUNTING_DOC_HDR
+      WHERE BELNR = LT_ACCOUNTING_DOC_HDR-BELNR
+    AND   GJAHR = LT_ACCOUNTING_DOC_HDR-GJAHR
+     AND   BUKRS = P_BUKRS.
+
+    SELECT SAKNR
+           TXT20
+      FROM SKAT
+      INTO TABLE LT_SKAT
+      FOR ALL ENTRIES IN LT_ACCOUNTING_DOC_ITEM
+      WHERE SAKNR = LT_ACCOUNTING_DOC_ITEM-HKONT
+      AND   SPRAS = SY-LANGU
+    AND   KTOPL = '1000'.
+
+    SELECT MWSKZ
+           TEXT1
+      FROM T007S
+      INTO TABLE LT_T007S
+      FOR ALL ENTRIES IN LT_ACCOUNTING_DOC_ITEM
+      WHERE MWSKZ = LT_ACCOUNTING_DOC_ITEM-MWSKZ
+    AND   KALSM = 'ZTAXIN'.
+
+    SELECT KUNNR
+           NAME1
+           ORT01
+           PSTLZ
+           LAND1
+           REGIO
+           ADRNR
+           STCD3
+           BRSCH
+      FROM KNA1
+      INTO TABLE LT_CUST_INFO
+      FOR ALL ENTRIES IN LT_ACCOUNTING_DOC_ITEM
+    WHERE KUNNR = LT_ACCOUNTING_DOC_ITEM-KUNNR.
+
+    IF NOT LT_CUST_INFO IS INITIAL.
+
+      SELECT KUNNR
+               KDGRP
+               BZIRK
+               VKBUR FROM KNVV INTO TABLE IT_KNVV
+               FOR ALL ENTRIES IN LT_CUST_INFO
+               WHERE KUNNR = LT_CUST_INFO-KUNNR.
+
+      SELECT SPRAS
+               BRSCH
+               BRTXT FROM T016T INTO TABLE IT_T016T
+               FOR ALL ENTRIES IN LT_CUST_INFO
+               WHERE BRSCH = LT_CUST_INFO-BRSCH.
+
+
+      SELECT ADDRNUMBER
+               NAME1
+               CITY2
+               POST_CODE1
+               STREET
+               STR_SUPPL1
+               STR_SUPPL2
+               STR_SUPPL3
+               LOCATION
+               COUNTRY
+          FROM ADRC
+          INTO TABLE LT_ADRC
+          FOR ALL ENTRIES IN LT_CUST_INFO
+      WHERE ADDRNUMBER = LT_CUST_INFO-ADRNR.
+
+      SELECT KUNNR
+             TAXKD
+        FROM KNVI
+        INTO TABLE LT_KNVI
+        FOR ALL ENTRIES IN LT_CUST_INFO
+        WHERE KUNNR = LT_CUST_INFO-KUNNR
+      AND   TATYP IN ('ULOC','UCOU').
+
+      IF SY-SUBRC IS INITIAL.
+        SELECT TATYP
+               TAXKD
+               VTEXT
+          FROM TSKDT
+          INTO TABLE LT_TSKDT
+          FOR ALL ENTRIES IN LT_KNVI
+          WHERE TAXKD = LT_KNVI-TAXKD
+        AND   SPRAS = SY-LANGU.
+
+
+      ENDIF.
+      SELECT LAND1
+             BLAND
+             BEZEI
+        FROM T005U
+        INTO TABLE LT_T005U
+        FOR ALL ENTRIES IN LT_CUST_INFO
+        WHERE SPRAS = SY-LANGU
+        AND   LAND1 = LT_CUST_INFO-LAND1
+      AND   BLAND = LT_CUST_INFO-REGIO.
+
+      SELECT GST_REGION
+             BEZEI
+        FROM ZGST_REGION
+        INTO TABLE LT_ZGST_REGION
+        FOR ALL ENTRIES IN LT_T005U
+      WHERE BEZEI = LT_T005U-BEZEI.
+
+    ENDIF.
+  ENDIF.
+
+  IF IT_KNVV IS NOT INITIAL.
+    SELECT SPRAS
+           KDGRP
+           KTEXT FROM T151T INTO TABLE IT_T151T
+           FOR ALL ENTRIES IN IT_KNVV
+           WHERE SPRAS = 'E'
+            AND  KDGRP = IT_KNVV-KDGRP.
+
+    SELECT SPRAS
+           BZIRK
+           BZTXT FROM T171T INTO TABLE IT_T171T
+           FOR ALL ENTRIES IN IT_KNVV
+           WHERE SPRAS = 'E'
+             AND BZIRK = IT_KNVV-BZIRK.
+
+    SELECT SPRAS
+           VKBUR
+           BEZEI FROM TVKBT INTO TABLE IT_TVKBT
+           FOR ALL ENTRIES IN IT_KNVV
+           WHERE SPRAS = 'E'
+             AND VKBUR = IT_KNVV-VKBUR.
+
+  ENDIF.
+  IF LT_ACCOUNTING_DOC_ITEM IS NOT INITIAL.
+    SELECT BUKRS
+           BELNR
+           GJAHR
+           BLART
+           BUDAT
+           XBLNR
+           BKTXT
+           WAERS
+           KURSF
+           STBLG
+           TCODE
+      FROM BKPF
+      INTO TABLE LT_BKPF
+      FOR ALL ENTRIES IN LT_ACCOUNTING_DOC_ITEM
+      WHERE STBLG = LT_ACCOUNTING_DOC_ITEM-BELNR
+      AND   GJAHR = LT_ACCOUNTING_DOC_ITEM-GJAHR
+      AND   BUKRS = LT_ACCOUNTING_DOC_ITEM-BUKRS.
+  ENDIF.
+
+  IF LT_BKPF IS NOT INITIAL.
+    SELECT BUKRS
+           BELNR
+           GJAHR
+           BUZEI
+           BUZID
+           UMSKZ
+           SHKZG
+           MWSKZ
+           DMBTR
+           WRBTR
+           TXGRP
+           KTOSL
+           ZUONR
+           SGTXT
+           SAKNR
+           HKONT
+           KUNNR
+           XBILK
+           HSN_SAC
+           KOART
+      FROM BSEG
+      APPENDING TABLE LT_ACCOUNTING_DOC_ITEM
+      FOR ALL ENTRIES IN LT_BKPF
+      WHERE BELNR = LT_BKPF-BELNR
+      AND   GJAHR = LT_BKPF-GJAHR
+      AND UMSKZ = ' '
+      AND   BUKRS = P_BUKRS.
+  ENDIF.
+
+
+  SORT LT_ACCOUNTING_DOC_HDR BY BELNR GJAHR.
+  SORT LT_ACCOUNTING_DOC_ITEM BY BELNR GJAHR BUZEI.
+  SORT LT_BSET BY BELNR GJAHR BUZEI.
+
+  DATA:
+  LV_FLAG TYPE C.
+  LT_ACCOUNTING_DOC_ITM1[] = LT_ACCOUNTING_DOC_ITEM[].
+  DELETE LT_ACCOUNTING_DOC_ITM1 WHERE KUNNR NE SPACE.
+
+
+  LOOP AT LT_ACCOUNTING_DOC_ITEM INTO LS_ACCOUNTING_DOC_ITEM WHERE KUNNR NE SPACE.
+
+
+    LOOP AT LT_ACCOUNTING_DOC_ITM1 INTO LS_ACCOUNTING_DOC_ITM1 WHERE BELNR = LS_ACCOUNTING_DOC_ITEM-BELNR AND
+                                                                     GJAHR = LS_ACCOUNTING_DOC_ITEM-GJAHR.
+
+      LS_FINAL-BELNR   = LS_ACCOUNTING_DOC_ITEM-BELNR.
+      LS_FINAL-GJAHR   = LS_ACCOUNTING_DOC_ITEM-GJAHR.
+      LS_FINAL-KUNNR   = LS_ACCOUNTING_DOC_ITEM-KUNNR.
+      LS_FINAL-SGTXT   = LS_ACCOUNTING_DOC_ITEM-SGTXT.
+      LS_FINAL-HSN_SAC = LS_ACCOUNTING_DOC_ITEM-HSN_SAC.
+
+      REPLACE ALL OCCURRENCES OF '<(>' IN LS_FINAL-SGTXT WITH SPACE.
+      REPLACE ALL OCCURRENCES OF '<)>' IN LS_FINAL-SGTXT WITH SPACE.
+
+      READ TABLE LT_ACCOUNTING_DOC_HDR INTO LS_ACCOUNTING_DOC_HDR WITH KEY BELNR = LS_ACCOUNTING_DOC_ITM1-BELNR
+                                                                           GJAHR = LS_ACCOUNTING_DOC_ITM1-GJAHR.
+      IF SY-SUBRC IS INITIAL.
+        LS_FINAL-BUDAT = LS_ACCOUNTING_DOC_HDR-BUDAT.
+        LS_FINAL-XBLNR = LS_ACCOUNTING_DOC_HDR-XBLNR.
+        LS_FINAL-BKTXT = LS_ACCOUNTING_DOC_HDR-BKTXT.
+        LS_FINAL-WAERS = LS_ACCOUNTING_DOC_HDR-WAERS.
+        LS_FINAL-KURSF = LS_ACCOUNTING_DOC_HDR-KURSF.
+        LS_FINAL-BLART = LS_ACCOUNTING_DOC_HDR-BLART.
+
+      ELSE.
+        READ TABLE LT_BKPF INTO LS_BKPF WITH KEY BELNR = LS_ACCOUNTING_DOC_ITM1-BELNR
+                                                 GJAHR = LS_ACCOUNTING_DOC_ITM1-GJAHR.
+        IF SY-SUBRC = 0.
+          LS_FINAL-BUDAT = LS_BKPF-BUDAT.
+          LS_FINAL-XBLNR = LS_BKPF-XBLNR.
+          LS_FINAL-BKTXT = LS_BKPF-BKTXT.
+          LS_FINAL-WAERS = LS_BKPF-WAERS.
+          LS_FINAL-KURSF = LS_BKPF-KURSF.
+          LS_FINAL-BLART = LS_BKPF-BLART.
+        ENDIF.
+
+
+      ENDIF.
+
+      IF LS_ACCOUNTING_DOC_HDR-TCODE = 'FB75' OR LS_ACCOUNTING_DOC_HDR-TCODE = 'FB70'.
+        LS_FINAL-STBLG = LS_ACCOUNTING_DOC_HDR-STBLG.
+
+
+        SELECT SINGLE BUDAT INTO LS_FINAL-DATE FROM BKPF WHERE BELNR = LS_ACCOUNTING_DOC_HDR-STBLG.
+      ENDIF.
+      IF LS_FINAL-BLART = 'RV'.
+        LS_FINAL-FI_DES = 'Billing Invoice'.
+      ELSEIF LS_FINAL-BLART = 'AB'.
+        LS_FINAL-FI_DES = 'Reverse Invoice'.
+      ELSEIF LS_FINAL-BLART = 'DG'.
+        LS_FINAL-FI_DES = 'Credit Memo'.
+      ELSEIF LS_FINAL-BLART = 'DA'.
+        LS_FINAL-FI_DES = 'Customer Document'.
+      ELSEIF LS_FINAL-BLART = 'UE'.
+        LS_FINAL-FI_DES = 'Initial Upload'.
+      ELSEIF LS_FINAL-BLART = 'DR'.
+        LS_FINAL-FI_DES = 'Customer Invoice'.
+      ENDIF.
+
+      READ TABLE LT_ACCOUNTING_DOC_ITM1 INTO LS_ACCOUNTING_DOC_ITM2  WITH KEY BELNR = LS_ACCOUNTING_DOC_ITM1-BELNR
+                                                                              GJAHR = LS_ACCOUNTING_DOC_ITM1-GJAHR
+                                                                              BUZEI = LS_ACCOUNTING_DOC_ITM1-BUZEI
+                                                                              KTOSL = SPACE
+                                                                              SAKNR = SPACE.
+      IF SY-SUBRC IS INITIAL.
+        IF LS_ACCOUNTING_DOC_ITM1-SHKZG = 'S'.
+          LS_FINAL-HWBAS   = LS_ACCOUNTING_DOC_ITM2-DMBTR * -1.
+          LS_FINAL-FWBAS   = LS_ACCOUNTING_DOC_ITM2-DMBTR * -1.
+        ELSE.
+          LS_FINAL-HWBAS   = LS_ACCOUNTING_DOC_ITM2-DMBTR.
+          LS_FINAL-FWBAS   = LS_ACCOUNTING_DOC_ITM2-DMBTR.
+        ENDIF.
+
+
+        LS_FINAL-MWSKZ = LS_ACCOUNTING_DOC_ITM2-MWSKZ.
+
+        LS_FINAL-SAKNR = LS_ACCOUNTING_DOC_ITM2-HKONT.
+      ELSE.
+        READ TABLE LT_ACCOUNTING_DOC_ITM1 INTO LS_ACCOUNTING_DOC_ITM3 WITH KEY BELNR = LS_ACCOUNTING_DOC_ITM1-BELNR
+                                                                               GJAHR = LS_ACCOUNTING_DOC_ITM1-GJAHR
+                                                                               BUZEI = LS_ACCOUNTING_DOC_ITM1-BUZEI
+                                                                               KOART = 'D'
+                                                                               SHKZG = 'S'.
+        IF SY-SUBRC IS INITIAL.
+          IF LS_ACCOUNTING_DOC_ITM3-SHKZG = 'S'.
+            LS_FINAL-HWBAS   = LS_ACCOUNTING_DOC_ITM3-DMBTR * -1.
+            LS_FINAL-FWBAS   = LS_ACCOUNTING_DOC_ITM3-DMBTR * -1.
+          ELSE.
+            LS_FINAL-HWBAS   = LS_ACCOUNTING_DOC_ITM3-DMBTR.
+            LS_FINAL-FWBAS   = LS_ACCOUNTING_DOC_ITM3-DMBTR.
+          ENDIF.
+        ENDIF.
+
+
+        LS_FINAL-MWSKZ = LS_ACCOUNTING_DOC_ITM3-MWSKZ.
+
+        LS_FINAL-SAKNR = LS_ACCOUNTING_DOC_ITM3-HKONT.
+      ENDIF.
+
+      READ TABLE LT_BSET INTO LS_BSET WITH KEY BELNR = LS_ACCOUNTING_DOC_ITM1-BELNR
+                                               GJAHR = LS_ACCOUNTING_DOC_ITM1-GJAHR.
+      LV_SHKZG = LS_BSET-SHKZG.
+      CASE LS_BSET-KSCHL.
+        WHEN 'ULOC'.
+          IF LV_SHKZG = 'S'.
+            LS_FINAL-ULOC    = LS_FINAL-ULOC - LS_BSET-HWSTE.
+          ELSE.
+            LS_FINAL-ULOC    = LS_FINAL-ULOC + LS_BSET-HWSTE.
+          ENDIF.
+          IF NOT LS_BSET-KBETR IS INITIAL.
+            LS_FINAL-ULOC_P  = LS_BSET-KBETR / 10.
+            LS_FINAL-MWSKZ = LS_BSET-MWSKZ.
+          ENDIF.
+
+        WHEN 'USTA'.
+          IF LV_SHKZG = 'S'.
+            LS_FINAL-USTA    = LS_FINAL-USTA - LS_BSET-HWSTE.
+          ELSE.
+            LS_FINAL-USTA    = LS_FINAL-USTA + LS_BSET-HWSTE.
+          ENDIF.
+
+          IF NOT LS_BSET-KBETR IS INITIAL.
+            LS_FINAL-USTA_P  = LS_BSET-KBETR / 10.
+          ENDIF.
+
+        WHEN 'UCOU'.
+          IF LV_SHKZG = 'S'.
+            LS_FINAL-UCOU    = LS_FINAL-UCOU - LS_BSET-HWSTE.
+          ELSE.
+            LS_FINAL-UCOU    = LS_FINAL-UCOU + LS_BSET-HWSTE.
+          ENDIF.
+
+          IF NOT LS_BSET-KBETR IS INITIAL.
+            LS_FINAL-UCOU_P  = LS_BSET-KBETR / 10.
+            LS_FINAL-MWSKZ = LS_BSET-MWSKZ.
+          ENDIF.
+
+          IF NOT LS_BSET-KBETR IS INITIAL.
+            LS_FINAL-UCOU_P  = LS_BSET-KBETR / 10.
+            LS_FINAL-MWSKZ = LS_BSET-MWSKZ.
+          ENDIF.
+      ENDCASE.
+
+      READ TABLE LT_T007S INTO LS_T007S WITH KEY MWSKZ = LS_FINAL-MWSKZ.
+      IF SY-SUBRC IS INITIAL.
+        LS_FINAL-TEXT1 = LS_T007S-TEXT1.
+      ENDIF.
+      READ TABLE LT_CUST_INFO INTO LS_CUST_INFO WITH KEY KUNNR = LS_ACCOUNTING_DOC_ITEM-KUNNR.
+      IF SY-SUBRC IS INITIAL.
+        LS_FINAL-NAME1 = LS_CUST_INFO-NAME1.
+        LS_FINAL-STCD3 = LS_CUST_INFO-STCD3.
+        LS_FINAL-BRSCH = LS_CUST_INFO-BRSCH.
+        LS_FINAL-ORT01 = LS_CUST_INFO-ORT01.
+        LS_FINAL-PSTLZ = LS_CUST_INFO-PSTLZ.
+      ENDIF.
+      READ TABLE IT_T016T INTO WA_T016T WITH KEY BRSCH = LS_CUST_INFO-BRSCH.
+      IF SY-SUBRC = 0.
+        LS_FINAL-BRTXT = WA_T016T-BRTXT.
+
+      ENDIF.
+      READ TABLE IT_KNVV INTO WA_KNVV WITH KEY KUNNR = LS_CUST_INFO-KUNNR.
+      IF SY-SUBRC = 0.
+        LS_FINAL-KDGRP      = WA_KNVV-KDGRP.
+        LS_FINAL-SALE_OFF   = WA_KNVV-VKBUR.
+        LS_FINAL-BZIRK      = WA_KNVV-BZIRK.
+      ENDIF.
+      READ TABLE IT_T151T INTO WA_T151T WITH KEY KDGRP = WA_KNVV-KDGRP.
+      IF SY-SUBRC = 0.
+        LS_FINAL-KTEXT = WA_T151T-KTEXT.
+
+      ENDIF.
+
+      READ TABLE IT_T171T INTO WA_T171T WITH KEY BZIRK = WA_KNVV-BZIRK.
+      IF SY-SUBRC = 0.
+        LS_FINAL-BZTXT = WA_T171T-BZTXT.
+
+      ENDIF.
+
+      READ TABLE IT_TVKBT INTO WA_TVKBT WITH KEY VKBUR = WA_KNVV-VKBUR.
+      IF SY-SUBRC = 0.
+        LS_FINAL-ORG_UNIT = WA_TVKBT-BEZEI.
+
+      ENDIF.
+
+
+
+      READ TABLE LT_ADRC INTO LS_ADRC WITH KEY ADDRNUMBER = LS_CUST_INFO-ADRNR.
+      IF SY-SUBRC IS INITIAL.
+        IF NOT LS_ADRC-STR_SUPPL1 IS INITIAL.
+          CONCATENATE LS_FINAL-ADDRESS LS_ADRC-STR_SUPPL1 INTO LS_FINAL-ADDRESS.
+        ENDIF.
+
+        IF NOT LS_ADRC-STR_SUPPL2 IS INITIAL.
+          CONCATENATE LS_FINAL-ADDRESS LS_ADRC-STR_SUPPL2 INTO LS_FINAL-ADDRESS.
+        ENDIF.
+
+        IF NOT LS_ADRC-STREET IS INITIAL.
+          CONCATENATE LS_FINAL-ADDRESS LS_ADRC-STREET INTO LS_FINAL-ADDRESS.
+        ENDIF.
+
+        IF NOT LS_ADRC-STR_SUPPL3 IS INITIAL.
+          CONCATENATE LS_FINAL-ADDRESS LS_ADRC-STR_SUPPL3 INTO LS_FINAL-ADDRESS SEPARATED BY ','.
+        ENDIF.
+        IF NOT LS_ADRC-LOCATION IS INITIAL.
+          CONCATENATE LS_FINAL-ADDRESS LS_ADRC-LOCATION INTO LS_FINAL-ADDRESS SEPARATED BY ','.
+        ENDIF.
+
+        IF NOT LS_ADRC-CITY2 IS INITIAL.
+          CONCATENATE LS_FINAL-ADDRESS LS_ADRC-CITY2 INTO LS_FINAL-ADDRESS SEPARATED BY ','.
+        ENDIF.
+        IF NOT LS_ADRC-POST_CODE1 IS INITIAL.
+          CONCATENATE LS_FINAL-ADDRESS 'PIN:' LS_ADRC-POST_CODE1 INTO LS_FINAL-ADDRESS SEPARATED BY ','.
+        ENDIF.
+        CONDENSE LS_FINAL-ADDRESS.
+      ENDIF.
+      READ TABLE LT_T005U INTO LS_T005U WITH KEY LAND1 = LS_CUST_INFO-LAND1
+                                                 BLAND = LS_CUST_INFO-REGIO.
+      IF SY-SUBRC IS INITIAL.
+        LS_FINAL-BEZEI = LS_T005U-BEZEI.
+      ENDIF.
+
+      IF LS_CUST_INFO-LAND1 = 'IN'.
+        READ TABLE LT_KNVI INTO LS_KNVI WITH KEY KUNNR = LS_CUST_INFO-KUNNR.
+        IF SY-SUBRC IS INITIAL.
+          IF LS_CUST_INFO-REGIO = '13'.
+            READ TABLE LT_TSKDT INTO LS_TSKDT WITH KEY TATYP = 'ULOC'.
+            IF SY-SUBRC IS INITIAL.
+              LS_FINAL-VTEXT = LS_TSKDT-VTEXT.
+            ENDIF.
+          ELSE.
+            READ TABLE LT_TSKDT INTO LS_TSKDT WITH KEY TATYP = 'UCOU'.
+            IF SY-SUBRC IS INITIAL.
+              LS_FINAL-VTEXT = LS_TSKDT-VTEXT.
+            ENDIF.
+          ENDIF.
+        ENDIF.
+      ENDIF.
+      READ TABLE LT_ZGST_REGION INTO LS_ZGST_REGION WITH KEY BEZEI = LS_T005U-BEZEI.
+      IF SY-SUBRC IS INITIAL.
+        LS_FINAL-GST_REGION = LS_ZGST_REGION-GST_REGION.
+      ENDIF.
+
+      READ TABLE LT_SKAT INTO LS_SKAT WITH KEY SAKNR = LS_FINAL-SAKNR.
+      IF SY-SUBRC IS INITIAL.
+        LS_FINAL-TXT20 = LS_SKAT-TXT20.
+      ENDIF.
+      LS_FINAL-TOT = LS_FINAL-HWBAS + LS_FINAL-ULOC + LS_FINAL-USTA + LS_FINAL-UCOU.
+
+      APPEND LS_FINAL TO CT_FINAL.
+      CLEAR:
+        LS_FINAL,LS_BSET,LS_ACCOUNTING_DOC_ITM1,LS_ACCOUNTING_DOC_HDR,LS_CUST_INFO,LS_ZGST_REGION,
+        LS_TSKDT,LS_T005U,LS_SKAT,LV_FLAG,LS_ACCOUNTING_DOC_ITM2,LS_ACCOUNTING_DOC_ITM3.
+
+
+    ENDLOOP.
+    CLEAR LS_ACCOUNTING_DOC_ITEM.
+  ENDLOOP.
+
+  SORT CT_FINAL BY BELNR GJAHR.
+  DELETE ADJACENT DUPLICATES FROM CT_FINAL COMPARING BELNR FWBAS .
+  LOOP AT CT_FINAL INTO LS_FINAL.
+    WA_FINAL-BELNR      =     LS_FINAL-BELNR     .
+*  wa_final-budat      =     ls_final-budat     .
+    WA_FINAL-BLART      =     LS_FINAL-BLART     .
+    WA_FINAL-FI_DES     =     LS_FINAL-FI_DES    .
+*  wa_final-bktxt      =     ls_final-bktxt     .
+    WA_FINAL-XBLNR      =     LS_FINAL-XBLNR     .
+    WA_FINAL-KUNNR      =     LS_FINAL-KUNNR     .
+    WA_FINAL-NAME1      =     LS_FINAL-NAME1     .
+*  wa_final-vtext      =     ls_final-vtext     .
+*  wa_final-stcd3      =     ls_final-stcd3     .
+    WA_FINAL-GST_REGION =     LS_FINAL-GST_REGION.
+    WA_FINAL-BEZEI      =     LS_FINAL-BEZEI     .
+    WA_FINAL-SGTXT      =     LS_FINAL-SGTXT     .
+*  wa_final-hsn_sac    =     ls_final-hsn_sac   .
+    WA_FINAL-MWSKZ      =     LS_FINAL-MWSKZ     .
+    WA_FINAL-TEXT1      =     LS_FINAL-TEXT1     .
+    WA_FINAL-FWBAS      =     LS_FINAL-FWBAS     .
+    WA_FINAL-WAERS      =     LS_FINAL-WAERS     .
+*  wa_final-kursf      =     ls_final-kursf     .
+    WA_FINAL-HWBAS      =     LS_FINAL-HWBAS     .
+    WA_FINAL-ULOC_P     =     LS_FINAL-ULOC_P    .
+    WA_FINAL-ULOC       =     LS_FINAL-ULOC      .
+    WA_FINAL-USTA_P     =     LS_FINAL-USTA_P    .
+    WA_FINAL-USTA       =     LS_FINAL-USTA      .
+    WA_FINAL-UCOU_P     =     LS_FINAL-UCOU_P    .
+    WA_FINAL-UCOU       =     LS_FINAL-UCOU      .
+    WA_FINAL-TOT        =     LS_FINAL-TOT       .
+    WA_FINAL-SAKNR      =     LS_FINAL-SAKNR     .
+    WA_FINAL-TXT20      =     LS_FINAL-TXT20     .
+*  wa_final-address    =     ls_final-address   .
+*  wa_final-gjahr      =     ls_final-gjahr     .
+*  wa_final-ref_date   =     ls_final-ref_date  .
+    WA_FINAL-KTEXT         = LS_FINAL-KTEXT    .
+    WA_FINAL-BZTXT         = LS_FINAL-BZTXT    .
+    WA_FINAL-ORG_UNIT      = LS_FINAL-ORG_UNIT .
+    WA_FINAL-BRTXT         = LS_FINAL-BRTXT    .
+    WA_FINAL-BRSCH         = LS_FINAL-BRSCH.
+    WA_FINAL-KDGRP         = LS_FINAL-KDGRP   .
+    WA_FINAL-SALE_OFF      = LS_FINAL-SALE_OFF.
+    WA_FINAL-BZIRK         = LS_FINAL-BZIRK   .
+    WA_FINAL-ORT01         = LS_FINAL-ORT01   .
+    WA_FINAL-PSTLZ         = LS_FINAL-PSTLZ   .
+    WA_FINAL-STBLG         = LS_FINAL-STBLG   .
+
+    CALL FUNCTION 'CONVERSION_EXIT_IDATE_OUTPUT'
+      EXPORTING
+        INPUT  = SY-DATUM
+      IMPORTING
+        OUTPUT = WA_FINAL-REF_DATE.
+    CONCATENATE WA_FINAL-REF_DATE+0(2) WA_FINAL-REF_DATE+2(3) WA_FINAL-REF_DATE+5(4)
+                   INTO WA_FINAL-REF_DATE SEPARATED BY '-'.
+
+    IF LS_FINAL-BUDAT IS NOT INITIAL.
+      CALL FUNCTION 'CONVERSION_EXIT_IDATE_OUTPUT'
+        EXPORTING
+          INPUT  = LS_FINAL-BUDAT
+        IMPORTING
+          OUTPUT = WA_FINAL-BUDAT.
+      CONCATENATE WA_FINAL-BUDAT+0(2) WA_FINAL-BUDAT+2(3) WA_FINAL-BUDAT+5(4)
+                     INTO WA_FINAL-BUDAT SEPARATED BY '-'.
+    ENDIF.
+
+    IF LS_FINAL-DATE IS NOT INITIAL.
+      CALL FUNCTION 'CONVERSION_EXIT_IDATE_OUTPUT'
+        EXPORTING
+          INPUT  = LS_FINAL-DATE
+        IMPORTING
+          OUTPUT = WA_FINAL-DATE.
+      CONCATENATE WA_FINAL-DATE+0(2) WA_FINAL-DATE+2(3) WA_FINAL-DATE+5(4)
+                     INTO WA_FINAL-DATE SEPARATED BY '-'.
+    ENDIF.
+
+
+
+
+*------------------Refreshable Date / Shift negative sign to left logic ------------------------------------------
+
+    CALL FUNCTION 'CLOI_PUT_SIGN_IN_FRONT'
+      CHANGING
+        VALUE = WA_FINAL-ULOC.
+
+    CALL FUNCTION 'CLOI_PUT_SIGN_IN_FRONT'
+      CHANGING
+        VALUE = WA_FINAL-USTA.
+
+    CALL FUNCTION 'CLOI_PUT_SIGN_IN_FRONT'
+      CHANGING
+        VALUE = WA_FINAL-UCOU.
+
+    CALL FUNCTION 'CLOI_PUT_SIGN_IN_FRONT'
+      CHANGING
+        VALUE = WA_FINAL-FWBAS.
+
+    CALL FUNCTION 'CLOI_PUT_SIGN_IN_FRONT'
+      CHANGING
+        VALUE = WA_FINAL-TOT.
+
+    CALL FUNCTION 'CLOI_PUT_SIGN_IN_FRONT'
+      CHANGING
+        VALUE = WA_FINAL-HWBAS.
+
+    APPEND WA_FINAL TO IT_FINAL.
+    CLEAR : LS_FINAL, WA_FINAL.
+  ENDLOOP.
+
+*  it_final[] = ct_final[].         " Abhishek Pisolkar (26.03.2018)
+
+ENDFORM.
+*&---------------------------------------------------------------------*
+*&      Form  DISPLAY
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*      -->P_GT_FINAL  text
+*----------------------------------------------------------------------*
+FORM DISPLAY  USING    CT_FINAL TYPE TT_FINAL.
+  DATA:
+    LT_FIELDCAT     TYPE SLIS_T_FIELDCAT_ALV,
+    LS_ALV_LAYOUT   TYPE SLIS_LAYOUT_ALV,
+    L_CALLBACK_PROG TYPE SY-REPID.
+
+  L_CALLBACK_PROG = SY-REPID.
+
+  PERFORM PREPARE_DISPLAY CHANGING LT_FIELDCAT.
+  CLEAR LS_ALV_LAYOUT.
+  LS_ALV_LAYOUT-ZEBRA = 'X'.
+  LS_ALV_LAYOUT-COLWIDTH_OPTIMIZE = 'X'.
+
+****************************************************************************************ADD CODE 23.03.2018*****************************
+*  IF p_own = 'X'.
+**    PERFORM fieldnames.
+**    PERFORM download_log.
+*  ENDIF.
+***************************************************************************************end code 23,03,2018**********************************
+
+  DATA IS_VARIANT TYPE DISVARIANT.
+
+  IS_VARIANT-REPORT = SY-CPROG.
+
+  CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+    EXPORTING
+      I_CALLBACK_PROGRAM      = L_CALLBACK_PROG
+*     I_CALLBACK_PF_STATUS_SET          = ' '
+      I_CALLBACK_USER_COMMAND = 'UCOMM_ON_ALV'
+*     I_CALLBACK_TOP_OF_PAGE  = ' '
+      IS_LAYOUT               = LS_ALV_LAYOUT
+      IT_FIELDCAT             = LT_FIELDCAT
+      IS_VARIANT              = IS_VARIANT
+      I_SAVE                  = 'X'
+    TABLES
+      T_OUTTAB                = CT_FINAL
+    EXCEPTIONS
+      PROGRAM_ERROR           = 1
+      OTHERS                  = 2.
+  IF SY-SUBRC <> 0.
+* Implement suitable error handling here
+  ENDIF.
+
+
+  IF P_DOWN = 'X'.
+
+    PERFORM DOWNLOAD.
+  ENDIF.
+ENDFORM.
+*&---------------------------------------------------------------------*
+*&      Form  PREPARE_DISPLAY
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*      <--P_LT_FIELDCAT  text
+*----------------------------------------------------------------------*
+FORM PREPARE_DISPLAY  CHANGING CT_FIELDCAT TYPE SLIS_T_FIELDCAT_ALV .
+  DATA:
+    GV_POS      TYPE I,
+    LS_FIELDCAT TYPE SLIS_FIELDCAT_ALV.
+
+  REFRESH CT_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'BELNR'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Accounting Doc.No.'(100).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+  LS_FIELDCAT-HOTSPOT   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'BUDAT'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Doc.Date'(101).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'BLART'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'FI Doc.Type'(102).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'FI_DES'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'FI Doc.Type Desc'(102).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'XBLNR'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Invoice No.'(104).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'KUNNR'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Customer Code'(105).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'NAME1'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Name'(106).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'KDGRP'.
+*  ls_fieldcat-outputlen = '14'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Customer Group'.
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'KTEXT'.
+*  ls_fieldcat-outputlen = '14'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Customer Group Desc'.
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'SALE_OFF'.
+*  ls_fieldcat-outputlen = '14'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Sales Office'.
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'ORG_UNIT'.
+*  ls_fieldcat-outputlen = '14'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Sales Office Desc'.
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'BZIRK'.
+*  ls_fieldcat-outputlen = '14'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Sales District'.
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'BZTXT'.
+*  ls_fieldcat-outputlen = '14'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Sales District Desc'.
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'BRSCH'.
+*  ls_fieldcat-outputlen = '14'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Industry Sector'.
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'BRTXT'.
+*  ls_fieldcat-outputlen = '14'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Industry Sector Desc'.
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'GST_REGION'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Customer State Code'(109).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'BEZEI'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Customer State Name'(110).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'SGTXT'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Description'(111).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'MWSKZ'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Tax Code'(113).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'TEXT1'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Tax Code Description'(114).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'FWBAS'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Basic Amount(DC) '(115).
+  LS_FIELDCAT-DO_SUM    = 'X'.
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'WAERS'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Currency'(116).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'HWBAS'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Basic Amount(LC) '(118).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+  LS_FIELDCAT-DO_SUM    = 'X'.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'ULOC_P'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Local Tax%'(119).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'ULOC'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Local Tax Amt'(120).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+  LS_FIELDCAT-DO_SUM    = 'X'.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'USTA_P'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'State Tax%'(121).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'USTA'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'State Tax Amt'(122).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+  LS_FIELDCAT-DO_SUM    = 'X'.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'UCOU_P'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'County Tax%'(123).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'UCOU'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'County Tax Amt'(124).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+  LS_FIELDCAT-DO_SUM    = 'X'.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'TOT'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Total Amt.'(125).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+  LS_FIELDCAT-DO_SUM    = 'X'.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'SAKNR'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Sales Ledger Code'(126).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  CLEAR LS_FIELDCAT.
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'TXT20'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Sales Ledger Head'(127).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'ORT01'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Customer City'(127).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'PSTLZ'.
+*  ls_fieldcat-outputlen = '5'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Customer Postal Code'(127).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'STBLG'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Reverse Doc No'(127).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+  GV_POS = GV_POS + 1.
+  LS_FIELDCAT-FIELDNAME = 'DATE'.
+  LS_FIELDCAT-TABNAME   = 'GT_FINAL'.
+  LS_FIELDCAT-SELTEXT_M = 'Reverse Doc Date'(127).
+  LS_FIELDCAT-COL_POS   = GV_POS.
+*  ls_fieldcat-hotspot   = 'X'.
+  APPEND LS_FIELDCAT TO CT_FIELDCAT.
+  CLEAR LS_FIELDCAT.
+
+
+
+*  gv_pos = gv_pos + 1.
+*  ls_fieldcat-fieldname = 'BKTXT'.
+**  ls_fieldcat-outputlen = '5'.
+*  ls_fieldcat-tabname   = 'GT_FINAL'.
+*  ls_fieldcat-seltext_m = 'Original Doc.No.'(103).
+*  ls_fieldcat-col_pos   = gv_pos.
+**  ls_fieldcat-hotspot   = 'X'.
+*  APPEND ls_fieldcat TO ct_fieldcat.
+*  CLEAR ls_fieldcat.
+*
+
+
+
+*
+*  gv_pos = gv_pos + 1.
+*  ls_fieldcat-fieldname = 'VTEXT'.
+**  ls_fieldcat-outputlen = '5'.
+*  ls_fieldcat-tabname   = 'GT_FINAL'.
+*  ls_fieldcat-seltext_m = 'REGD/URD/SEZ/DEEMED/GOV'(107).
+*  ls_fieldcat-col_pos   = gv_pos.
+**  ls_fieldcat-hotspot   = 'X'.
+*  APPEND ls_fieldcat TO ct_fieldcat.
+*  CLEAR ls_fieldcat.
+*
+*  gv_pos = gv_pos + 1.
+*  ls_fieldcat-fieldname = 'STCD3'.
+**  ls_fieldcat-outputlen = '5'.
+*  ls_fieldcat-tabname   = 'GT_FINAL'.
+*  ls_fieldcat-seltext_m = 'Customer GSTIN'(108).
+*  ls_fieldcat-col_pos   = gv_pos.
+**  ls_fieldcat-hotspot   = 'X'.
+*  APPEND ls_fieldcat TO ct_fieldcat.
+*  CLEAR ls_fieldcat.
+
+
+
+*  gv_pos = gv_pos + 1.
+*  ls_fieldcat-fieldname = 'HSN_SAC'.
+**  ls_fieldcat-outputlen = '5'.
+*  ls_fieldcat-tabname   = 'GT_FINAL'.
+*  ls_fieldcat-seltext_m = 'HSN/SAC'(112).
+*  ls_fieldcat-col_pos   = gv_pos.
+**  ls_fieldcat-hotspot   = 'X'.
+*  APPEND ls_fieldcat TO ct_fieldcat.
+*  CLEAR ls_fieldcat.
+
+
+
+*  CLEAR ls_fieldcat.
+*  gv_pos = gv_pos + 1.
+*  ls_fieldcat-fieldname = 'KURSF'.
+**  ls_fieldcat-outputlen = '5'.
+*  ls_fieldcat-tabname   = 'GT_FINAL'.
+*  ls_fieldcat-seltext_m = 'Exchange Rate'(117).
+*  ls_fieldcat-col_pos   = gv_pos.
+**  ls_fieldcat-hotspot   = 'X'.
+*  APPEND ls_fieldcat TO ct_fieldcat.
+*  CLEAR ls_fieldcat.
+
+
+
+ENDFORM.
+
+
+*&---------------------------------------------------------------------*
+*&      Form  UCOMM_ON_ALV
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+
+FORM UCOMM_ON_ALV USING R_UCOMM LIKE SY-UCOMM
+                    RS_SELFIELD TYPE SLIS_SELFIELD.
+  DATA:
+    LS_FINAL TYPE T_FINAL,
+    LV_BURKS TYPE BSEG-BUKRS VALUE 'US00'.
+
+  CASE R_UCOMM.
+    WHEN '&IC1'. "for double click
+      IF RS_SELFIELD-FIELDNAME = 'BELNR'.
+        READ TABLE GT_FINAL INTO LS_FINAL INDEX RS_SELFIELD-TABINDEX.
+        SET PARAMETER ID 'BLN' FIELD RS_SELFIELD-VALUE.
+        SET PARAMETER ID 'BUK' FIELD LV_BURKS.
+        SET PARAMETER ID 'GJR' FIELD LS_FINAL-GJAHR.
+        CALL TRANSACTION 'FB03' AND SKIP FIRST SCREEN.
+      ENDIF.
+  ENDCASE.
+ENDFORM.
+*&---------------------------------------------------------------------*
+*&      Form  DOWNLOAD
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM DOWNLOAD .
+
+  TYPE-POOLS TRUXS.
+  DATA: IT_CSV TYPE TRUXS_T_TEXT_DATA,
+        WA_CSV TYPE LINE OF TRUXS_T_TEXT_DATA,
+        HD_CSV TYPE LINE OF TRUXS_T_TEXT_DATA.
+
+*  DATA: lv_folder(150).
+  DATA: LV_FILE(30).
+  DATA: LV_FULLFILE TYPE STRING,
+        LV_DAT(10),
+        LV_TIM(4).
+  DATA: LV_MSG(80).
+
+  CALL FUNCTION 'SAP_CONVERT_TO_TXT_FORMAT'
+*   EXPORTING
+*     I_FIELD_SEPERATOR          =
+*     I_LINE_HEADER              =
+*     I_FILENAME                 =
+*     I_APPL_KEEP                = ' '
+    TABLES
+      I_TAB_SAP_DATA       = IT_FINAL "gt_final         " Abhishek Pisolkar (26.03.2018)
+    CHANGING
+      I_TAB_CONVERTED_DATA = IT_CSV
+    EXCEPTIONS
+      CONVERSION_FAILED    = 1
+      OTHERS               = 2.
+  IF SY-SUBRC <> 0.
+* Implement suitable error handling here
+  ENDIF.
+
+  PERFORM CVS_HEADER USING HD_CSV.
+
+*  lv_folder = 'D:\usr\sap\DEV\D00\work'.
+  LV_FILE = 'ZUSSALESFI.TXT'.
+
+  CONCATENATE P_FOLDER '/'  LV_FILE
+    INTO LV_FULLFILE.
+
+  WRITE: / 'ZUSSALES_FI Download started on', SY-DATUM, 'at', SY-UZEIT.
+
+
+
+  OPEN DATASET LV_FULLFILE
+    FOR OUTPUT IN TEXT MODE ENCODING DEFAULT.  "NON-UNICODE.
+  IF SY-SUBRC = 0.
+    DATA LV_STRING_1669 TYPE STRING.
+    DATA LV_CRLF_1669 TYPE STRING.
+    LV_CRLF_1669 = CL_ABAP_CHAR_UTILITIES=>CR_LF.
+    LV_STRING_1669 = HD_CSV.
+    LOOP AT IT_CSV INTO WA_CSV.
+      CONCATENATE LV_STRING_1669 LV_CRLF_1669 WA_CSV INTO LV_STRING_1669.
+      CLEAR: WA_CSV.
+    ENDLOOP.
+    TRANSFER LV_STRING_1669 TO LV_FULLFILE.
+    CLOSE DATASET LV_FULLFILE.
+    CONCATENATE 'File' LV_FULLFILE 'downloaded' INTO LV_MSG SEPARATED BY SPACE.
+    MESSAGE LV_MSG TYPE 'S'.
+  ENDIF.
+
+  PERFORM FIELDNAMES.
+  PERFORM DOWNLOAD_LOG.
+
+ENDFORM.
+*&---------------------------------------------------------------------*
+*&      Form  CVS_HEADER
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*      -->P_HD_CSV  text
+*----------------------------------------------------------------------*
+FORM CVS_HEADER  USING    PD_CSV.
+  DATA: L_FIELD_SEPERATOR.
+  L_FIELD_SEPERATOR = CL_ABAP_CHAR_UTILITIES=>HORIZONTAL_TAB.
+
+  CONCATENATE 'Accounting Doc.No.'
+              'Doc.Date'
+              'FI Doc.Type'
+              'Invoice No.'
+              'Customer Code'
+              'Customer Name'
+              'Customer Group'
+              'Customer Group Desc'
+              'Sales Office'
+              'Sales Office Desc'
+              'Sales District'
+              'Sales District Desc'
+              'Industry Sector'
+              'Industry Sector Desc'
+              'Customer State Code'
+              'Customer State Name'
+              'Description'
+              'Tax Code'
+              'Tax Code Description'
+              'Basic Amount(DC)'
+              'Currency'
+              'Basic Amount(LC)'
+              'Local Tax%'
+              'Local Tax Amt'
+              'State Tax%'
+              'State Tax Amt'
+              'County Tax%'
+              'County Tax Amt'
+              'Total Amt'
+              'Sales Ledger Code'
+              'Sales Ledger Head'
+              'Refreshable Date'
+              'FI Doc.Type Desc'
+              'Customer City'
+              'Customer Postal Code'
+              'Reverse Doc No'
+              'Reverse Doc Date'
+       INTO PD_CSV SEPARATED BY L_FIELD_SEPERATOR.
+ENDFORM.
+
+INCLUDE ZFI_SALES_REG_FIELDNAMF_NEW.
+*INCLUDE zfi_sales_register_fieldnamf01.
+*&---------------------------------------------------------------------*
+*&      Form  FIELDNAMES
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+* -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM FIELDNAMES .
+
+  WA_FIELDNAME-FIELD_NAME = 'Accounting Doc.No.'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Doc.Date'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'FI Doc.Type'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Invoice No.'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Customer Code'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Customer  Name'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Customer Group'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Customer Group Desc'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Sales Office'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Sales Office Desc'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Sales District'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Sales District Desc'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Industry Sector'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Industry Sector Desc'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Customer State Code'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Customer State Name'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Description'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Tax Code'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Tax Code Description'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Basic Amount(DC)'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Currency'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Basic Amount(LC)'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Local Tax%'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Local Tax Amt'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'State Tax%'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'State Tax Amt'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'County Tax%'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'County Tax Amt'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Total Amt'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Sales Ledger Code'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Sales Ledger Head'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+  WA_FIELDNAME-FIELD_NAME = 'Refreshable Date'.
+  APPEND WA_FIELDNAME TO IT_FIELDNAME.
+
+ENDFORM.
+*&---------------------------------------------------------------------*
+*&      Form  DOWNLOAD_LOG
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM DOWNLOAD_LOG .
+  DATA : V_FULLPATH      TYPE STRING.
+
+  CALL FUNCTION 'GUI_FILE_SAVE_DIALOG'
+    EXPORTING
+      WINDOW_TITLE      = 'STATUS RECORD FILE'
+      DEFAULT_EXTENSION = '.xls'
+    IMPORTING
+*     filename          = v_efile
+      FULLPATH          = V_FULLPATH.
+
+
+  CALL FUNCTION 'GUI_DOWNLOAD'
+    EXPORTING
+      FILENAME                = V_FULLPATH
+      FILETYPE                = 'ASC'
+      WRITE_FIELD_SEPARATOR   = 'X'
+    TABLES
+      DATA_TAB                = IT_FINAL
+      FIELDNAMES              = IT_FIELDNAME
+    EXCEPTIONS
+      FILE_WRITE_ERROR        = 1
+      NO_BATCH                = 2
+      GUI_REFUSE_FILETRANSFER = 3
+      INVALID_TYPE            = 4
+      NO_AUTHORITY            = 5
+      UNKNOWN_ERROR           = 6
+      HEADER_NOT_ALLOWED      = 7
+      SEPARATOR_NOT_ALLOWED   = 8
+      FILESIZE_NOT_ALLOWED    = 9
+      HEADER_TOO_LONG         = 10
+      DP_ERROR_CREATE         = 11
+      DP_ERROR_SEND           = 12
+      DP_ERROR_WRITE          = 13
+      UNKNOWN_DP_ERROR        = 14
+      ACCESS_DENIED           = 15
+      DP_OUT_OF_MEMORY        = 16
+      DISK_FULL               = 17
+      DP_TIMEOUT              = 18
+      FILE_NOT_FOUND          = 19
+      DATAPROVIDER_EXCEPTION  = 20
+      CONTROL_FLUSH_ERROR     = 21
+      OTHERS                  = 22.
+
+  IF SY-SUBRC <> 0.
+* MESSAGE ID SY-MSGID TYPE SY-MSGTY NUMBER SY-MSGNO
+*         WITH SY-MSGV1 SY-MSGV2 SY-MSGV3 SY-MSGV4.
+  ELSE.
+    MESSAGE 'Please check Status File' TYPE 'S'.
+  ENDIF.
+
+
+
+ENDFORM.
+*ENDFORM.

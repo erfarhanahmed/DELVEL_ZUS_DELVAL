@@ -1,0 +1,25 @@
+
+LV_TOT_QTY = LV_TOT_QTY + WA_VBAP-KWMENG.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

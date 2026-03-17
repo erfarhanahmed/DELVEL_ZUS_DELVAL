@@ -1,0 +1,24 @@
+
+SELECT SINGLE * FROM MAKT INTO WA_MAKT
+  WHERE MATNR = WA_FINAL-MATNR.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

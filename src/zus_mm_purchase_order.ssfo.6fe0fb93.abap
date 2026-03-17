@@ -1,0 +1,26 @@
+IF WA_ITEM-PSTYP = '9'.
+GV_QTY = GV_QTY + WA_ESKL-MENGE.
+ELSE.
+GV_QTY = GV_QTY + WA_ITEM-MENGE.
+ENDIF.
+
+
+
+GV_TOTAL = GV_TOTAL + WA_ITEM-NETWR.
+
+amount = amount + WA_ITEM-BRTWR.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
